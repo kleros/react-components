@@ -1,132 +1,125 @@
-import { Col, Row } from "antd";
-import { ReactComponent as Ghost } from "../assets/images/ghost.svg";
-import { ReactComponent as Github } from "../assets/images/github.svg";
-import { ReactComponent as LinkedIn } from "../assets/images/linkedin.svg";
-import { ReactComponent as Question } from "../assets/images/question-circle.svg";
-import { ReactComponent as Telegram } from "../assets/images/telegram.svg";
-import { ReactComponent as Twitter } from "../assets/images/twitter.svg";
-import React from "react";
-import styled from "styled-components";
+import { ReactComponent as Ghost } from "./images/ghost.svg";
+import { ReactComponent as Github } from "./images/github.svg";
+import { ReactComponent as LinkedIn } from "./images/linkedin.svg";
+import { ReactComponent as Question } from "./images/question-circle.svg";
+import { ReactComponent as Telegram } from "./images/telegram.svg";
+import { ReactComponent as Twitter } from "./images/twitter.svg";
 
-const StyledFooter = styled(Row)`
-  background: #4d00b4;
-  color: white;
-  font-size: 14px;
-  height: 60px;
-  margin-top: -60px;
-  padding: 18px 25px;
-  width: 100%;
+import React, { useEffect, useState } from "react";
 
-  @media (max-width: 768px) {
-    display: none;
-  }
+export default ({ name }) => {
+  const minWidth768 = window.matchMedia("(min-width: 768px)");
+  const [matches, setMatches] = useState(minWidth768.matches);
 
-  a {
-    color: white;
-    text-decoration: none;
-  }
-`;
-const StyledLeft = styled(Col)`
-  display: inline-block;
-  text-align: left;
-  width: 33%;
-`;
-const StyledCenter = styled(Col)`
-  display: inline-block;
-  text-align: center;
-  width: 33%;
-`;
-const StyledRight = styled(Col)`
-  display: inline-block;
-
-  .help {
-    display: inline-block;
-
-    @media (max-width: 1130px) {
-      width: 100%;
-    }
-
-    &-text {
-      display: inline-block;
-      padding-right: 10px;
-    }
-
-    &-icon {
-      position: relative;
-      top: 4px;
-      width: 18px;
-    }
-  }
-
-  .icons {
-    display: inline-block;
-    position: relative;
-    top: 3px;
-
-    @media (max-width: 1130px) {
-      display: none;
-    }
-
-    a {
-      padding-right: 10px;
-    }
-  }
-`;
-
-const Footer = () => (
-  <StyledFooter>
-    <StyledLeft lg={4}>
-      <a href="https://kleros.io">Find out more about Kleros</a>
-    </StyledLeft>
-    <StyledCenter lg={16}>Kleros Governor</StyledCenter>
-    <StyledRight lg={8}>
-      <Row>
-        <Col className="help" lg={8} offset={4}>
-          <a href="https://t.me/kleros">
-            <div className="help-text">I need help</div>
-            <Question className="help-icon" />
-          </a>
-        </Col>
-        <Col className="icons" lg={12}>
-          <a
-            href="https://twitter.com/kleros_io?"
-            rel="noopener noreferrer"
-            target="_blank"
+  useEffect(() => {
+    const handler = e => setMatches(e.matches);
+    minWidth768.addListener(handler);
+    return () => minWidth768.removeListener(handler);
+  });
+  return (
+    <footer
+      style={{
+        fontFamily: "Roboto",
+        fontWeight: "bold",
+        position: "absolute",
+        bottom: "0",
+        left: "0",
+        width: "100%",
+        height: "3rem",
+        display: "grid",
+        grid: matches
+          ? "1fr / [footer-start] 20px [banner] 10fr  [title] 10fr [help] 4fr 1fr [social] 5fr 20px [footer-end]"
+          : "1fr / [footer-start] 30px [banner] 9fr  [help] 6fr 30px [footer-end]",
+        background: "#4d00b4",
+        color: "white",
+        alignItems: "center",
+        justifyItems: "center",
+        minHeight: "40px"
+      }}
+    >
+      <div style={{ gridColumn: "banner", justifySelf: "start" }}>
+        <a
+          style={{
+            color: "white",
+            textDecoration: "none"
+          }}
+          href="https://kleros.io"
+        >
+          Find out more about Kleros
+        </a>
+      </div>
+      <div style={{ display: matches ? "" : "none", gridColumn: "title" }}>
+        {name}
+      </div>
+      <div style={{ display: "grid", gridColumn: "help", justifySelf: "end" }}>
+        <a
+          href="https://t.me/kleros"
+          style={{ color: "white", textDecoration: "none" }}
+        >
+          I need help <Question style={{ verticalAlign: "middle" }} />
+        </a>
+      </div>
+      <div
+        style={{
+          display: matches ? "" : "none",
+          gridColumn: "social",
+          justifySelf: "stretch",
+          alignItems: "center",
+          textAlign: "center"
+        }}
+      >
+        <div
+          style={{
+            display: matches ? "grid" : "none",
+            alignItems: "center",
+            grid: " 1fr / 1fr"
+          }}
+        >
+          <div
+            className="icons"
+            style={{
+              display: matches ? "grid" : "none",
+              grid: "1fr / 1fr 1fr 1fr 1fr 1fr"
+            }}
           >
-            <Twitter />
-          </a>
-          <a
-            href="https://github.com/kleros"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <Github />
-          </a>
-          <a
-            href="https://blog.kleros.io/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <Ghost />
-          </a>
-          <a
-            href="https://www.linkedin.com/company/kleros/"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <LinkedIn />
-          </a>
-          <a
-            href="https://t.me/kleros"
-            rel="noopener noreferrer"
-            target="_blank"
-          >
-            <Telegram />
-          </a>
-        </Col>
-      </Row>
-    </StyledRight>
-  </StyledFooter>
-);
-
-export default Footer;
+            <a
+              href="https://twitter.com/kleros_io?"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Twitter style={{ verticalAlign: "middle" }} />
+            </a>
+            <a
+              href="https://github.com/kleros"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Github style={{ verticalAlign: "middle" }} />
+            </a>
+            <a
+              href="https://blog.kleros.io/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Ghost style={{ verticalAlign: "middle" }} />
+            </a>
+            <a
+              href="https://www.linkedin.com/company/kleros/"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <LinkedIn style={{ verticalAlign: "middle" }} />
+            </a>
+            <a
+              href="https://t.me/kleros"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              <Telegram style={{ verticalAlign: "middle" }} />
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
