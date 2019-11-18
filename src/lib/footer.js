@@ -13,9 +13,9 @@ class Footer extends React.Component {
     this.state = { matches: window.matchMedia("(min-width: 768px)").matches };
   }
 
-  setMatches = matches => {
+  setMatches(matches) {
     this.setState({ matches });
-  };
+  }
 
   componentDidMount() {
     const handler = e => this.setMatches(e.matches);
