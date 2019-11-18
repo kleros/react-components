@@ -32,9 +32,7 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "last 5 Chrome versions"
     ],
     "development": [
       "last 1 chrome version",
@@ -44,12 +42,8 @@
   },
   "babel": {
     "presets": [
-      [
-        "react-app",
-        {
-          "absoluteRuntime": false
-        }
-      ]
+      "@babel/preset-env",
+      "@babel/preset-react"
     ]
   }
 }

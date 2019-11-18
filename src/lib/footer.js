@@ -7,7 +7,7 @@ import { ReactComponent as Twitter } from "./images/twitter.svg";
 
 import React, { useEffect, useState } from "react";
 
-export default ({ name }) => {
+export default function Footer({ name }) {
   const minWidth768 = window.matchMedia("(min-width: 768px)");
   const [matches, setMatches] = useState(minWidth768.matches);
 
@@ -122,4 +122,4 @@ export default ({ name }) => {
       </div>
     </footer>
   );
-};
+}
