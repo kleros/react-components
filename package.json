@@ -1,15 +1,15 @@
 {
-  "name": "react-components",
+  "name": "@kleros/react-components",
   "version": "0.1.0",
   "author": "Kleros",
   "main": "./lib/index.js",
+  "files": [
+    "lib"
+  ],
   "license": "MIT",
-  "dependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.0.0-beta.41",
-    "@babel/preset-react": "^7.7.0"
-  },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.41",
+    "@babel/cli": "^7.7.0",
     "babel-preset-react-app": "^9.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel ./src/lib --out-dir dist --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
+    "build": "rm -rf lib && NODE_ENV=production babel ./src/lib --out-dir lib --copy-files --ignore __tests__,spec.js,test.js,__snapshots__",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -39,9 +39,9 @@
   "babel": {
     "presets": [
       [
-        "@babel/preset-react",
+        "react-app",
         {
-          "modules": "commonjs"
+          "absoluteRuntime": false
         }
       ]
     ]
