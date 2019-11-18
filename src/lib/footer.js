@@ -98,35 +98,55 @@ class Footer extends React.Component {
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <img src={Twitter} />
+                <img
+                  src={Twitter}
+                  style={{ verticalAlign: "middle" }}
+                  alt="Twitter"
+                />
               </a>
               <a
                 href="https://github.com/kleros"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <img src={Github} />
+                <img
+                  src={Github}
+                  style={{ verticalAlign: "middle" }}
+                  alt="Github"
+                />
               </a>
               <a
                 href="https://blog.kleros.io/"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <img src={Ghost} />
+                <img
+                  src={Ghost}
+                  style={{ verticalAlign: "middle" }}
+                  alt="Ghost"
+                />
               </a>
               <a
                 href="https://www.linkedin.com/company/kleros/"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <img src={LinkedIn} />
+                <img
+                  src={LinkedIn}
+                  style={{ verticalAlign: "middle" }}
+                  alt="LinkedIn"
+                />
               </a>
               <a
                 href="https://t.me/kleros"
                 rel="noopener noreferrer"
                 target="_blank"
               >
-                <img src={Telegram} />
+                <img
+                  src={Telegram}
+                  style={{ verticalAlign: "middle" }}
+                  alt="Telegram"
+                />
               </a>
             </div>
           </div>
