@@ -27,8 +27,8 @@ class Footer extends React.Component {
     return (
       <footer
         style={{
-          fontFamily:
-            "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
+          fontFamily: "Roboto,sans-serif",
+          fontSize: "1rem",
           bottom: "0",
           left: "0",
           width: "100%",
