@@ -32,7 +32,7 @@ class Footer extends React.Component {
           bottom: "0",
           left: "0",
           width: "100%",
-          height: "3rem",
+          height: "4rem",
           display: "grid",
           grid: matches
             ? "1fr / [footer-start] 20px [banner] 10fr [title] 10fr [help] 4fr 1fr [social] 5fr 20px [footer-end]"
@@ -48,14 +48,23 @@ class Footer extends React.Component {
           <a
             style={{
               color: "white",
-              textDecoration: "none"
+              textDecoration: "none",
+              fontFamily: "Roboto,sans-serif",
+              fontSize: "1rem"
             }}
             href="https://kleros.io"
           >
             Find out more about Kleros
           </a>
         </div>
-        <div style={{ display: matches ? "" : "none", gridColumn: "title" }}>
+        <div
+          style={{
+            display: matches ? "" : "none",
+            gridColumn: "title",
+            fontFamily: "Roboto,sans-serif",
+            fontSize: "1rem"
+          }}
+        >
           {name}
         </div>
         <div
@@ -66,7 +75,11 @@ class Footer extends React.Component {
             style={{ color: "white", textDecoration: "none" }}
           >
             I need help{" "}
-            <img src={Question} style={{ verticalAlign: "middle" }} />
+            <img
+              src={Question}
+              style={{ verticalAlign: "middle" }}
+              alt="Question"
+            />
           </a>
         </div>
         <div
