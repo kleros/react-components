@@ -7,7 +7,7 @@ import { ReactComponent as Twitter } from "./images/twitter.svg";
 
 import React, { useEffect, useState } from "react";
 
-export default ({ name }) => {
+const Footer = ({ name }) => {
   const minWidth768 = window.matchMedia("(min-width: 768px)");
   const [matches, setMatches] = useState(minWidth768.matches);
 
@@ -19,8 +19,8 @@ export default ({ name }) => {
   return (
     <footer
       style={{
-        fontFamily: "Roboto",
-        fontWeight: "bold",
+        fontFamily:
+          "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif",
         position: "absolute",
         bottom: "0",
         left: "0",
@@ -28,8 +28,8 @@ export default ({ name }) => {
         height: "3rem",
         display: "grid",
         grid: matches
-          ? "1fr / [footer-start] 20px [banner] 10fr  [title] 10fr [help] 4fr 1fr [social] 5fr 20px [footer-end]"
-          : "1fr / [footer-start] 30px [banner] 9fr  [help] 6fr 30px [footer-end]",
+          ? "1fr / [footer-start] 20px [banner] 10fr [title] 10fr [help] 4fr 1fr [social] 5fr 20px [footer-end]"
+          : "1fr / [footer-start] 30px [banner] 9fr [help] 6fr 30px [footer-end]",
         background: "#4d00b4",
         color: "white",
         alignItems: "center",
@@ -123,3 +123,5 @@ export default ({ name }) => {
     </footer>
   );
 };
+
+export { Footer };
