@@ -1,0 +1,21 @@
+html {
+  font-size: 14px;
+}
+
+body {
+  margin: 0;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+svg {
+  height: 1rem;
+  vertical-align: text-bottom;
+}
+
+path {
+  fill: white;
+}
