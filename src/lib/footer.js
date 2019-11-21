@@ -91,7 +91,7 @@ class Footer extends React.Component {
           style={{ display: "grid", gridColumn: "help", justifySelf: "end" }}
         >
           <a style={anchorStyle} href="https://t.me/kleros">
-            I need help
+            I need help{" "}
             <svg
               style={svgStyle}
               width="18"
