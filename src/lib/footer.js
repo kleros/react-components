@@ -1,27 +1,23 @@
 import React from "react";
 import "./footer.react_components.css";
+import PropTypes from "prop-types";
 
 class Footer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { matches: window.matchMedia("(min-width: 768px)").matches };
-  }
-
-  setMatches(matches) {
-    this.setState({ matches });
-  }
-
   componentDidMount() {
-    const handler = e => this.setMatches(e.matches);
-    window.matchMedia("(min-width: 768px)").addListener(handler);
+    this.setState({
+      biggerThan768px: window.matchMedia("(min-width: 768px)").matches
+    });
+    window
+      .matchMedia("(min-width: 768px)")
+      .addListener(e => this.setState({ biggerThan768px: e.matches }));
   }
   render() {
     const iconStyle = {
       verticalAlign: "-webkit-baseline-middle"
     };
 
-    const { matches } = this.state;
-    const { name } = this.props;
+    const { biggerThan768px } = this.state || false;
+    const { name, contractAddress } = this.props;
     return (
       <footer
         style={{
@@ -30,7 +26,7 @@ class Footer extends React.Component {
           width: "100%",
           height: "4rem",
           display: "grid",
-          grid: matches
+          grid: biggerThan768px
             ? "1fr / [footer-start] 20px [banner] 10fr [title] 10fr [help] 4fr 1fr [social] 5fr 20px [footer-end]"
             : "1fr / [footer-start] 30px [banner] 9fr [help] 6fr 30px [footer-end]",
           background: "#4d00b4",
@@ -43,12 +39,12 @@ class Footer extends React.Component {
         </div>
         <div
           style={{
-            display: matches ? "" : "none",
+            display: biggerThan768px ? "" : "none",
             gridColumn: "title"
           }}
         >
           <a
-            href="https://etherscan.io"
+            href={`https://etherscan.io/address/${contractAddress}#code`}
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -95,7 +91,7 @@ class Footer extends React.Component {
         </div>
         <div
           style={{
-            display: matches ? "grid" : "none",
+            display: biggerThan768px ? "grid" : "none",
             grid: "1fr / 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
             gridColumn: "social",
             justifySelf: "stretch",
@@ -270,5 +266,10 @@ class Footer extends React.Component {
     );
   }
 }
+
+Footer.propTypes = {
+  name: PropTypes.string.isRequired,
+  contractAddress: PropTypes.string.isRequired
+};
 
 export default Footer;
