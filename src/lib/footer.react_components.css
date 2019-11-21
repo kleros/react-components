@@ -6,16 +6,17 @@ body {
   margin: 0;
 }
 
-a {
+footer > div > a {
   color: white;
   text-decoration: none;
 }
 
-svg {
+a > svg {
   height: 1rem;
   vertical-align: text-bottom;
 }
 
-path {
+a > svg > path,
+a > svg > g > path {
   fill: white;
 }
