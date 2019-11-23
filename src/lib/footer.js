@@ -2,9 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Footer extends React.Component {
-  state = {
-    biggerThan768px: window.matchMedia("(min-width: 768px)").matches
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      biggerThan768px: window.matchMedia("(min-width: 768px)").matches
+    };
+  }
 
   componentDidMount() {
     window
