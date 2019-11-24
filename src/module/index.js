@@ -1,4 +1,9 @@
 import React from "react";
 import { Footer } from "../lib/index";
-const App = () => <Footer name="Kleros Governor" />;
+const App = () => (
+  <Footer
+    appName="Test Application"
+    repository="https://github.com/kleros/react-components"
+  />
+);
 export default App;
