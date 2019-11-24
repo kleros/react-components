@@ -2,6 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 
 class Footer extends React.Component {
+  static defaultProps = {
+    contractAddress: "0x988b3a538b618c7a603e1c11ab82cd16dbe28069",
+    repository: "https://github.com/kleros"
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -29,7 +33,7 @@ class Footer extends React.Component {
     };
 
     const { biggerThan768px } = this.state || false;
-    const { name, contractAddress } = this.props;
+    const { name, contractAddress, repository } = this.props;
     return (
       <footer
         style={{
@@ -134,7 +138,7 @@ class Footer extends React.Component {
               focusable="false"
               data-prefix="fab"
               data-icon="slack"
-              class="svg-inline--fa fa-slack fa-w-14"
+              className="svg-inline--fa fa-slack fa-w-14"
               role="img"
               viewBox="0 0 448 512"
             >
@@ -158,7 +162,7 @@ class Footer extends React.Component {
               focusable="false"
               data-prefix="fab"
               data-icon="reddit-alien"
-              class="svg-inline--fa fa-reddit-alien fa-w-16"
+              className="svg-inline--fa fa-reddit-alien fa-w-16"
               role="img"
               viewBox="0 0 512 512"
             >
@@ -181,7 +185,7 @@ class Footer extends React.Component {
               focusable="false"
               data-prefix="fab"
               data-icon="twitter"
-              class="svg-inline--fa fa-twitter fa-w-16"
+              className="svg-inline--fa fa-twitter fa-w-16"
               role="img"
               viewBox="0 0 512 512"
             >
@@ -193,7 +197,7 @@ class Footer extends React.Component {
           </a>
           <a
             style={anchorStyle}
-            href="https://github.com/kleros"
+            href={repository}
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -204,7 +208,7 @@ class Footer extends React.Component {
               focusable="false"
               data-prefix="fab"
               data-icon="github"
-              class="svg-inline--fa fa-github fa-w-16"
+              className="svg-inline--fa fa-github fa-w-16"
               role="img"
               viewBox="0 0 496 512"
             >
@@ -281,7 +285,7 @@ class Footer extends React.Component {
               focusable="false"
               data-prefix="fab"
               data-icon="linkedin-in"
-              class="svg-inline--fa fa-linkedin-in fa-w-14"
+              className="svg-inline--fa fa-linkedin-in fa-w-14"
               role="img"
               viewBox="0 0 448 512"
             >
@@ -304,7 +308,7 @@ class Footer extends React.Component {
               focusable="false"
               data-prefix="fab"
               data-icon="telegram-plane"
-              class="svg-inline--fa fa-telegram-plane fa-w-24"
+              className="svg-inline--fa fa-telegram-plane fa-w-24"
               role="img"
               viewBox="0 0 448 512"
             >
@@ -322,7 +326,8 @@ class Footer extends React.Component {
 
 Footer.propTypes = {
   name: PropTypes.string.isRequired,
-  contractAddress: PropTypes.string.isRequired
+  contractAddress: PropTypes.string.isRequired,
+  repository: PropTypes.string
 };
 
 export default Footer;
