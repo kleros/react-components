@@ -29,7 +29,7 @@ class Footer extends React.Component {
     };
 
     const { biggerThan768px } = this.state || false;
-    const { appName, contractAddress, repository } = this.props;
+    const { appName, contractExplorerURL, repository } = this.props;
 
     return (
       <footer
@@ -60,7 +60,7 @@ class Footer extends React.Component {
         >
           <a
             style={anchorStyle}
-            href={`https://etherscan.io/address/${contractAddress}#code`}
+            href={contractExplorerURL}
             rel="noopener noreferrer"
             target="_blank"
           >
@@ -325,13 +325,14 @@ class Footer extends React.Component {
 
 Footer.defaultProps = {
   appName: "Kleros",
-  contractAddress: "0x988b3a538b618c7a603e1c11ab82cd16dbe28069",
+  contractAddress:
+    "https://etherscan.io/address/0x988b3a538b618c7a603e1c11ab82cd16dbe28069#code",
   repository: "https://github.com/kleros"
 };
 
 Footer.propTypes = {
   appName: PropTypes.string.isRequired,
-  contractAddress: PropTypes.string.isRequired,
+  contractExplorerURL: PropTypes.string.isRequired,
   repository: PropTypes.string
 };
 
