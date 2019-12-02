@@ -325,7 +325,7 @@ class Footer extends React.Component {
 
 Footer.defaultProps = {
   appName: "Kleros",
-  contractAddress:
+  contractExplorerURL:
     "https://etherscan.io/address/0x988b3a538b618c7a603e1c11ab82cd16dbe28069#code",
   repository: "https://github.com/kleros"
 };
