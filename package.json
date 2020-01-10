@@ -13,11 +13,12 @@
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
+    "@babel/cli": "^7.7.0",
+    "@babel/core": "^7.0.0-beta.41",
+    "@babel/plugin-proposal-class-properties": "^7.7.4",
+    "babel-preset-react-app": "^9.0.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "@babel/core": "^7.0.0-beta.41",
-    "@babel/cli": "^7.7.0",
-    "babel-preset-react-app": "^9.0.2",
     "react-scripts": "3.2.0"
   },
   "scripts": {
@@ -47,6 +48,9 @@
     "presets": [
       "@babel/preset-env",
       "@babel/preset-react"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties"
     ]
   }
 }

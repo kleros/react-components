@@ -1,6 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+export const content = {
+  en: { "find-out": "Find out more about Kleros", help: "I need help" },
+  tr: {
+    "find-out": "Kleros hakkında detaylı bilgi için",
+    help: "Yardıma ihtiyacım var"
+  },
+  fr: { "find-out": "En Savoir plus sur Kleros", help: "J’ai besoin d’aide" },
+  pt: { "find-out": "Saiba mais sobre o Kleros", help: "Preciso de ajuda" },
+  es: { "find-out": "Aprende más sobre Kleros", help: "Necesito ayuda" },
+  ru: { "find-out": "Узнайте больше о Kleros", help: "Мне нужна помощь" },
+  "pt-BR": {
+    "find-out": "Aprenda mais sobre Kleros",
+    help: "Preciso de ajuda"
+  }
+};
+
+const DEFAULT_LOCALE = "en";
+
 class Footer extends React.Component {
   constructor(props) {
     super(props);
@@ -9,21 +27,10 @@ class Footer extends React.Component {
     };
   }
 
-  content = {
-    en: { "find-out": "Find out more about Kleros", help: "I need help" },
-    tr: {
-      "find-out": "Kleros hakkında detaylı bilgi için",
-      help: "Yardıma ihtiyacım var"
-    },
-    fr: { "find-out": "En Savoir plus sur Kleros", help: "J’ai besoin d’aide" },
-    pt: { "find-out": "Saiba mais sobre o Kleros", help: "Preciso de ajuda" },
-    es: { "find-out": "Aprende más sobre Kleros", help: "Necesito ayuda" },
-    ru: { "find-out": "Узнайте больше о Kleros", help: "Мне нужна помощь" },
-    "pt-BR": {
-      "find-out": "Aprenda mais sobre Kleros",
-      help: "Preciso de ajuda"
-    }
-  };
+  getContent = (locale, key) =>
+    Object.keys(content).includes(locale)
+      ? content[locale][key]
+      : content[DEFAULT_LOCALE][key];
 
   componentDidMount() {
     window
@@ -65,7 +72,7 @@ class Footer extends React.Component {
       >
         <div style={{ gridColumn: "banner", justifySelf: "start" }}>
           <a style={anchorStyle} href="https://kleros.io">
-            {this.content[locale]["find-out"]}
+            {this.getContent(locale, "find-out")}
           </a>
         </div>
         <div
@@ -112,7 +119,7 @@ class Footer extends React.Component {
           style={{ display: "grid", gridColumn: "help", justifySelf: "end" }}
         >
           <a style={anchorStyle} href="https://t.me/kleros">
-            {this.content[locale].help}{" "}
+            {this.getContent(locale, "help")}{" "}
             <svg
               style={svgStyle}
               width="18"
@@ -351,7 +358,7 @@ Footer.propTypes = {
   appName: PropTypes.string.isRequired,
   contractExplorerURL: PropTypes.string.isRequired,
   repository: PropTypes.string,
-  locale: PropTypes.string
+  locale: PropTypes.oneOf(Object.keys(content))
 };
 
 export default Footer;
