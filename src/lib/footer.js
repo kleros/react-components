@@ -9,6 +9,22 @@ class Footer extends React.Component {
     };
   }
 
+  content = {
+    en: { "find-out": "Find out more about Kleros", help: "I need help" },
+    tr: {
+      "find-out": "Kleros hakkında detaylı bilgi için",
+      help: "Yardıma ihtiyacım var"
+    },
+    fr: { "find-out": "En Savoir plus sur Kleros", help: "J’ai besoin d’aide" },
+    pt: { "find-out": "Saiba mais sobre o Kleros", help: "Preciso de ajuda" },
+    es: { "find-out": "Aprende más sobre Kleros", help: "Necesito ayuda" },
+    ru: { "find-out": "Узнайте больше о Kleros", help: "Мне нужна помощь" },
+    "pt-BR": {
+      "find-out": "Aprenda mais sobre Kleros",
+      help: "Preciso de ajuda"
+    }
+  };
+
   componentDidMount() {
     window
       .matchMedia("(min-width: 768px)")
@@ -29,7 +45,7 @@ class Footer extends React.Component {
     };
 
     const { biggerThan768px } = this.state || false;
-    const { appName, contractExplorerURL, repository } = this.props;
+    const { appName, contractExplorerURL, repository, locale } = this.props;
 
     return (
       <footer
@@ -49,7 +65,7 @@ class Footer extends React.Component {
       >
         <div style={{ gridColumn: "banner", justifySelf: "start" }}>
           <a style={anchorStyle} href="https://kleros.io">
-            Find out more about Kleros
+            {this.content[locale]["find-out"]}
           </a>
         </div>
         <div
@@ -96,7 +112,7 @@ class Footer extends React.Component {
           style={{ display: "grid", gridColumn: "help", justifySelf: "end" }}
         >
           <a style={anchorStyle} href="https://t.me/kleros">
-            I need help{" "}
+            {this.content[locale].help}{" "}
             <svg
               style={svgStyle}
               width="18"
@@ -327,13 +343,15 @@ Footer.defaultProps = {
   appName: "Kleros",
   contractExplorerURL:
     "https://etherscan.io/address/0x988b3a538b618c7a603e1c11ab82cd16dbe28069#code",
-  repository: "https://github.com/kleros"
+  repository: "https://github.com/kleros",
+  locale: "en"
 };
 
 Footer.propTypes = {
   appName: PropTypes.string.isRequired,
   contractExplorerURL: PropTypes.string.isRequired,
-  repository: PropTypes.string
+  repository: PropTypes.string,
+  locale: PropTypes.string
 };
 
 export default Footer;
