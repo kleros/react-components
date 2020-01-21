@@ -52,5 +52,14 @@
     "plugins": [
       "@babel/plugin-proposal-class-properties"
     ]
+  },
+  "dependencies": {
+    "antd": "^3.26.7",
+    "is-image": "^3.0.0",
+    "is-text-path": "^2.0.0",
+    "is-video": "^1.0.1",
+    "less": "^3.10.3",
+    "less-loader": "^5.0.0",
+    "styled-components": "^5.0.0"
   }
 }

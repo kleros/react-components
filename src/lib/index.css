@@ -1,0 +1,6 @@
+div.ant-collapse-header > * {
+  color: white;
+}
+div.ant-collapse-header > * > * {
+  color: white;
+}
