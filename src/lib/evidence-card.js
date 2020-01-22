@@ -2,7 +2,6 @@ import { Card, Col, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
 import { ReactComponent as EtherscanSVG } from "./assets/images/logos/etherscan-logo-circle.svg";
-import Attachment from "./attachment";
 
 const StyledCard = styled(Card)`
   background: #ffffff;
@@ -109,12 +108,7 @@ const EvidenceCard = ({ evidence, metaEvidence }) => {
                 <StyledTime>{displayDateUTC(submittedAtDate)}</StyledTime>
               </StyledSubmitter>
             </Col>
-            <Col lg={1}>
-              <Attachment
-                URI={evidence.evidenceJSON.fileURI}
-                extension={evidence.evidenceJSON.fileTypeExtension}
-              />
-            </Col>
+            <Col lg={1}></Col>
           </Row>
         </StyledFooterBody>
       </StyledFooter>
