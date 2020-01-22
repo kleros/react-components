@@ -37,68 +37,70 @@ export const displayDateUTC = dateString => {
   return `${date} ${months[month]} ${year} ${hours}:${minutes} UTC`;
 };
 
-const EvidenceCard = ({ evidence, metaEvidence }) => {
-  const submittedAtDate = new Date(evidence.submittedAt * 1000);
-
-  return (
-    <Card
-      style={{
-        background: "white",
-        borderRadius: "12px",
-        boxShadow: "0px 6px 36px #bc9cff"
-      }}
-      extra={
-        <a href={`https://etherscan.com/address/${evidence.submittedBy}`}>
-          <EtherscanSVG style={{ width: "2rem", height: "auto" }} />
-        </a>
-      }
-      title={
-        <div style={{ color: "#4d00b4" }}>
-          {evidence.evidenceJSON.title || evidence.evidenceJSON.name}
-        </div>
-      }
-    >
-      <div style={{ color: "black", padding: "1.5rem" }}>
-        {evidence.evidenceJSON.description}
-      </div>
-      <div
+class EvidenceCard extends React.Component {
+  render() {
+    const { evidence, metaEvidence } = this.props;
+    const submittedAtDate = new Date(evidence.submittedAt * 1000);
+    return (
+      <Card
         style={{
-          background: "#f5f1fd",
-          borderBottomLeftRadius: "12px",
-          borderBottomRightRadius: "12px"
+          background: "white",
+          borderRadius: "12px",
+          boxShadow: "0px 6px 36px #bc9cff"
         }}
+        extra={
+          <a href={`https://etherscan.com/address/${evidence.submittedBy}`}>
+            <EtherscanSVG style={{ width: "2rem", height: "auto" }} />
+          </a>
+        }
+        title={
+          <div style={{ color: "#4d00b4" }}>
+            {evidence.evidenceJSON.title || evidence.evidenceJSON.name}
+          </div>
+        }
       >
+        <div style={{ color: "black", padding: "1.5rem" }}>
+          {evidence.evidenceJSON.description}
+        </div>
         <div
           style={{
-            padding: "1.5rem",
+            background: "#f5f1fd",
             borderBottomLeftRadius: "12px",
             borderBottomRightRadius: "12px"
           }}
         >
-          <Row>
-            <Col lg={23}>
-              <div style={{ color: "#4d00b4", fontWeight: "500" }}>
-                Submitted By:{" "}
-                {metaEvidence.aliases &&
-                metaEvidence.aliases[evidence.submittedBy]
-                  ? metaEvidence.aliases[evidence.submittedBy]
-                  : truncateAddress(evidence.submittedBy)}
-                <div style={{ fontWeight: "400" }}>
-                  {displayDateUTC(submittedAtDate)}
+          <div
+            style={{
+              padding: "1.5rem",
+              borderBottomLeftRadius: "12px",
+              borderBottomRightRadius: "12px"
+            }}
+          >
+            <Row>
+              <Col lg={23}>
+                <div style={{ color: "#4d00b4", fontWeight: "500" }}>
+                  Submitted By:{" "}
+                  {metaEvidence.aliases &&
+                  metaEvidence.aliases[evidence.submittedBy]
+                    ? metaEvidence.aliases[evidence.submittedBy]
+                    : truncateAddress(evidence.submittedBy)}
+                  <div style={{ fontWeight: "400" }}>
+                    {displayDateUTC(submittedAtDate)}
+                  </div>
                 </div>
-              </div>
-            </Col>
-            <Col lg={1}>
-              <Attachment
-                URI={evidence.evidenceJSON.fileURI}
-                extension={evidence.evidenceJSON.fileTypeExtension}
-              />
-            </Col>
-          </Row>
+              </Col>
+              <Col lg={1}>
+                <Attachment
+                  URI={evidence.evidenceJSON.fileURI}
+                  extension={evidence.evidenceJSON.fileTypeExtension}
+                />
+              </Col>
+            </Row>
+          </div>
         </div>
-      </div>
-    </Card>
-  );
-};
+      </Card>
+    );
+  }
+}
 
 export default EvidenceCard;
