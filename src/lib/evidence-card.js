@@ -1,5 +1,7 @@
 import { Card, Col, Row } from "antd";
 import React from "react";
+import PropTypes from "prop-types";
+
 import { ReactComponent as EtherscanSVG } from "./assets/images/logos/etherscan-logo-circle.svg";
 import Attachment from "./attachment.js";
 import "./evidence-card.css";
@@ -40,7 +42,10 @@ export const displayDateUTC = dateString => {
 class EvidenceCard extends React.Component {
   render() {
     const { evidence, metaEvidence } = this.props;
+
+    if (!evidence) return null;
     const submittedAtDate = new Date(evidence.submittedAt * 1000);
+
     return (
       <Card
         style={{
@@ -102,5 +107,11 @@ class EvidenceCard extends React.Component {
     );
   }
 }
+
+EvidenceCard.propTypes = {
+  evidence: PropTypes.object
+};
+
+EvidenceCard.defaultProps = {};
 
 export default EvidenceCard;

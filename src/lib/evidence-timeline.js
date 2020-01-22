@@ -20,21 +20,9 @@ class EvidenceTimeline extends React.Component {
 
     const { evidence, ruling, metaEvidence } = this.props;
     return (
-      <Collapse
-        defaultActiveKey={["1"]}
-        expandIconPosition="right"
-        title={
-          <>
-            <Folder /> {`Evidence (${evidence ? evidence.length : 0})`}
-          </>
-        }
-      >
+      <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
         <Panel
-          header={
-            <>
-              <Folder /> <span>Evidence</span>
-            </>
-          }
+          header={{ Folder }}
           style={{ background: "#4d00b4" }}
           className="primary"
           key="1"
