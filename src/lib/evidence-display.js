@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Collapse, Timeline, Card } from "antd";
 import "antd/dist/antd.css";
-import { ReactComponent as Folder } from "./assets/images/folder.svg";
 const { Panel } = Collapse;
 
 class EvidenceDisplay extends React.Component {
@@ -21,7 +20,7 @@ class EvidenceDisplay extends React.Component {
   render() {
     return (
       <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
-        <Panel header={Folder} className="primary" key="1">
+        <Panel className="primary" key="1">
           <Timeline>
             <Timeline.Item>Jurors ruled: Yes, Add It</Timeline.Item>
             <Timeline.Item>step2 2015-09-01</Timeline.Item>

@@ -3,7 +3,6 @@ import React from "react";
 import EvidenceCard from "./evidence-card.js";
 import PropTypes from "prop-types";
 
-import { ReactComponent as Folder } from "./assets/images/folder.svg";
 const { Panel } = Collapse;
 
 class EvidenceTimeline extends React.Component {
@@ -21,12 +20,7 @@ class EvidenceTimeline extends React.Component {
     const { evidence, ruling, metaEvidence } = this.props;
     return (
       <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
-        <Panel
-          header={{ Folder }}
-          style={{ background: "#4d00b4" }}
-          className="primary"
-          key="1"
-        >
+        <Panel style={{ background: "#4d00b4" }} className="primary" key="1">
           <div style={{ padding: "35px 10%" }}>
             <Row id="scroll-top">
               <Col
