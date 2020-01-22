@@ -1,6 +1,6 @@
 {
   "name": "@kleros/react-components",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "author": "Kleros",
   "main": "dist/index.js",
   "module": "dist/index.js",
