@@ -62,7 +62,7 @@ class EvidenceDisplay extends React.Component {
         onChange={callback}
         expandIconPosition="right"
       >
-        <Panel header={<Folder />} className="primary" key="1">
+        <Panel header={Folder} className="primary" key="1">
           <Timeline>
             <Timeline.Item>Jurors ruled: Yes, Add It</Timeline.Item>
             <Timeline.Item>step2 2015-09-01</Timeline.Item>
