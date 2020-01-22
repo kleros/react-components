@@ -54,7 +54,7 @@ class EvidenceCard extends React.Component {
         }}
         extra={
           <a href={`https://etherscan.com/address/${evidence.submittedBy}`}>
-            <EtherscanSVG style={{ width: "2rem", height: "auto" }} />
+            link
           </a>
         }
         title={
