@@ -1,45 +1,9 @@
 import { Col, Icon, Row, Collapse } from "antd";
 import React from "react";
-import styled from "styled-components";
 import EvidenceCard from "./evidence-card";
 
 import { ReactComponent as Folder } from "./assets/images/folder.svg";
 const { Panel } = Collapse;
-
-const StyledHeaderCol = styled(Col)`
-  color: #4d00b4;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 21px;
-`;
-const StyledDividerCol = styled(Col)`
-  border-right: 1px solid #4d00b4;
-  height: 30px;
-`;
-const EventDiv = styled.div`
-  background: #4d00b4;
-  border-radius: 300px;
-  color: white;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 14px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 8px 0;
-  text-align: center;
-  width: 135px;
-`;
-const ScrollText = styled.div`
-  color: #009aff;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 16px;
-  text-align: right;
-`;
-const StyledEvidenceTimelineArea = styled.div`
-  padding: 35px 10%;
-`;
 
 const EvidenceTimeline = ({
   evidence = [],
@@ -76,12 +40,31 @@ const EvidenceTimeline = ({
         className="primary"
         key="1"
       >
-        <StyledEvidenceTimelineArea>
+        <div style={{ padding: "35px 10%" }}>
           <Row id="scroll-top">
-            <StyledHeaderCol lg={4}>Latest</StyledHeaderCol>
+            <Col
+              style={{ color: "#4d00b4", fontSize: "18px", lineHeight: "21px" }}
+              lg={4}
+            >
+              Latest
+            </Col>
             <Col lg={16}>
               {ruling && (
-                <EventDiv style={{ width: "225px" }}>
+                <div
+                  style={{
+                    background: "#4d00b4",
+                    borderRadius: "300px",
+                    color: "white",
+                    fontSize: "12px",
+                    fontWeight: "500",
+                    lineHeight: "14px",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    padding: "8px 0",
+                    textAlign: "center",
+                    width: "225px"
+                  }}
+                >
                   {ruling
                     ? `Jurors ruled: ${
                         metaEvidence.metaEvidenceJSON.rulingOptions
@@ -91,10 +74,15 @@ const EvidenceTimeline = ({
                           : ruling
                       }`
                     : "Jurors refused to make a ruling"}
-                </EventDiv>
+                </div>
               )}
             </Col>
-            <ScrollText
+            <div
+              style={{
+                color: "#009aff",
+                cursor: "pointer",
+                textAlign: "right"
+              }}
               lg={4}
               onClick={() => {
                 const _bottomRow = document.getElementById("scroll-bottom");
@@ -102,12 +90,15 @@ const EvidenceTimeline = ({
               }}
             >
               Scroll to Bottom <Icon type="arrow-down" />
-            </ScrollText>
+            </div>
           </Row>
           {sortedEvidence.map((_evidence, i) => (
             <div key={`evidence-${i}`}>
               <Row>
-                <StyledDividerCol lg={12} />
+                <Col
+                  style={{ borderRight: "1px solid #4d00b4", height: "3rem" }}
+                  lg={12}
+                />
               </Row>
               <EvidenceCard
                 evidence={_evidence}
@@ -116,14 +107,43 @@ const EvidenceTimeline = ({
             </div>
           ))}
           <Row>
-            <StyledDividerCol lg={12} />
+            <Col
+              style={{ borderRight: "1px solid #4d00b4", height: "3rem" }}
+              lg={12}
+            />
           </Row>
           <Row id="scroll-bottom">
-            <StyledHeaderCol lg={4}>Start</StyledHeaderCol>
-            <Col lg={16}>
-              <EventDiv>Dispute Created</EventDiv>
+            <Col
+              style={{ color: "#4d00b4", fontSize: "18px", lineHeight: "21px" }}
+              lg={4}
+            >
+              Start
             </Col>
-            <ScrollText
+            <Col lg={16}>
+              <div
+                style={{
+                  background: "#4d00b4",
+                  borderRadius: "300px",
+                  color: "white",
+                  fontSize: "12px",
+                  fontWeight: "500",
+                  lineHeight: "14px",
+                  marginLeft: "auto",
+                  marginRight: "auto",
+                  padding: "8px 0",
+                  textAlign: "center",
+                  width: "135px"
+                }}
+              >
+                Dispute Created
+              </div>
+            </Col>
+            <Col
+              style={{
+                color: "#009aff",
+                cursor: "pointer",
+                textAlign: "right"
+              }}
               lg={4}
               onClick={() => {
                 const _bottomRow = document.getElementById("scroll-top");
@@ -131,9 +151,9 @@ const EvidenceTimeline = ({
               }}
             >
               Scroll to Top <Icon type="arrow-up" />
-            </ScrollText>
+            </Col>
           </Row>
-        </StyledEvidenceTimelineArea>
+        </div>
       </Panel>
     </Collapse>
   );

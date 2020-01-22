@@ -1,54 +1,14 @@
 import { Card, Col, Row } from "antd";
 import React from "react";
-import styled from "styled-components";
 import { ReactComponent as EtherscanSVG } from "./assets/images/logos/etherscan-logo-circle.svg";
-
-const StyledCard = styled(Card)`
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0px 6px 36px #bc9cff;
-
-  > .ant-card-body {
-    padding: 0;
-  }
-`;
-const StyledTitle = styled.div`
-  color: #4d00b4;
-`;
-const StyledDescription = styled.div`
-  color: #000000;
-  padding: 1.5rem;
-`;
-const StyledFooter = styled.div`
-  background: #f5f1fd;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-`;
-const StyledFooterBody = styled.div`
-  padding: 1.5rem;
-  border-bottom-left-radius: 12px;
-  border-bottom-right-radius: 12px;
-
-  box-shadow: 0px 6px 36px #bc9cff;
-`;
-const StyledSubmitter = styled.div`
-  color: #4d00b4;
-  font-weight: 500;
-`;
-const StyledTime = styled.div`
-  font-weight: 400;
-`;
+import Attachment from "./attachment";
+import "./evidence-card.css";
 
 const truncateAddress = address =>
   `${address.substring(0, 6)}...${address.substring(
     address.length - 4,
     address.length
   )}`;
-
-const StyledEtherscanSVG = styled(EtherscanSVG)`
-  width: 2rem;
-  height: auto;
-`;
 
 const months = [
   "Jan",
@@ -81,38 +41,63 @@ const EvidenceCard = ({ evidence, metaEvidence }) => {
   const submittedAtDate = new Date(evidence.submittedAt * 1000);
 
   return (
-    <StyledCard
-      style={{ background: "white", borderRadius: "12px" }}
+    <Card
+      style={{
+        background: "white",
+        borderRadius: "12px",
+        boxShadow: "0px 6px 36px #bc9cff"
+      }}
       extra={
         <a href={`https://etherscan.com/address/${evidence.submittedBy}`}>
-          <StyledEtherscanSVG />
+          <EtherscanSVG style={{ width: "2rem", height: "auto" }} />
         </a>
       }
       title={
-        <StyledTitle>
+        <div style={{ color: "#4d00b4" }}>
           {evidence.evidenceJSON.title || evidence.evidenceJSON.name}
-        </StyledTitle>
+        </div>
       }
     >
-      <StyledDescription>{evidence.evidenceJSON.description}</StyledDescription>
-      <StyledFooter>
-        <StyledFooterBody>
+      <div style={{ color: "black", padding: "1.5rem" }}>
+        {evidence.evidenceJSON.description}
+      </div>
+      <div
+        style={{
+          background: "#f5f1fd",
+          borderBottomLeftRadius: "12px",
+          borderBottomRightRadius: "12px"
+        }}
+      >
+        <div
+          style={{
+            padding: "1.5rem",
+            borderBottomLeftRadius: "12px",
+            borderBottomRightRadius: "12px"
+          }}
+        >
           <Row>
             <Col lg={23}>
-              <StyledSubmitter>
+              <div style={{ color: "#4d00b4", fontWeight: "500" }}>
                 Submitted By:{" "}
                 {metaEvidence.aliases &&
                 metaEvidence.aliases[evidence.submittedBy]
                   ? metaEvidence.aliases[evidence.submittedBy]
                   : truncateAddress(evidence.submittedBy)}
-                <StyledTime>{displayDateUTC(submittedAtDate)}</StyledTime>
-              </StyledSubmitter>
+                <div style={{ fontWeight: "400" }}>
+                  {displayDateUTC(submittedAtDate)}
+                </div>
+              </div>
             </Col>
-            <Col lg={1}></Col>
+            <Col lg={1}>
+              <Attachment
+                URI={evidence.evidenceJSON.fileURI}
+                extension={evidence.evidenceJSON.fileTypeExtension}
+              />
+            </Col>
           </Row>
-        </StyledFooterBody>
-      </StyledFooter>
-    </StyledCard>
+        </div>
+      </div>
+    </Card>
   );
 };
 
