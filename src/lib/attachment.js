@@ -9,26 +9,6 @@ import { ReactComponent as Video } from "./assets/images/video.svg";
 import isImage from "is-image";
 import isTextPath from "is-text-path";
 import isVideo from "is-video";
-import styled from "styled-components/macro";
-
-const StyledPopover = styled(({ className, ...rest }) => (
-  <Popover className={className} overlayClassName={className} {...rest} />
-))`
-  .ant-popover {
-    &-inner {
-      border: 1px solid;
-    }
-
-    &-title {
-      color: inherit;
-    }
-  }
-`;
-const StyledIFrame = styled.iframe`
-  height: 400px;
-  margin-top: -8px;
-  width: 300px;
-`;
 
 const isPDF = extension => extension.toLowerCase() === ".pdf";
 
@@ -66,7 +46,7 @@ const Attachment = ({
   }
 
   return (
-    <StyledPopover
+    <Popover
       arrowPointAtCenter
       className="ternary-border-color theme-border-color ternary-color theme-color"
       content={
@@ -74,7 +54,7 @@ const Attachment = ({
           <>
             {description}
             <Divider dashed />
-            <StyledIFrame
+            <iframe
               frameBorder="0"
               src={previewURI}
               title="Attachment Preview"
@@ -97,7 +77,7 @@ const Attachment = ({
       ) : (
         Component
       )}
-    </StyledPopover>
+    </Popover>
   );
 };
 

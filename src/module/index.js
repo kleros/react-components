@@ -44,6 +44,19 @@ const App = () => (
             fileURI: "",
             fileTypeExtension: ""
           }
+        },
+        {
+          submittedBy: "0xac96570CF5bb71e557f117651Ce4B100B6d06af8",
+          submittedAt: "1600000000",
+          evidenceJSON: {
+            title: "All roads lead to ZB TOKEN",
+            description:
+              "I send supporting evidence and refute the last presentation of the challenger. Please see attached document",
+            fileURI:
+              "/ipfs/QmcsAoDv9HeQ3a4TsGQH2g2putqShZfPLjTspntJqdyNms/evidence-ok.pdf",
+            fileTypeExtension: "pdf",
+            evidenceSide: 0
+          }
         }
       ]}
     />
