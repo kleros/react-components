@@ -3,6 +3,8 @@ import React from "react";
 import EvidenceCard from "./evidence-card.js";
 import PropTypes from "prop-types";
 
+import "./evidence-timeline.css";
+
 const { Panel } = Collapse;
 
 class EvidenceTimeline extends React.Component {

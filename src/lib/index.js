@@ -1,5 +1,4 @@
 import "antd/dist/antd.css";
-import "./index.css";
 
 export { default as Footer } from "./footer.js";
 export { default as Attachment } from "./attachment.js";
