@@ -9,7 +9,7 @@ import { ReactComponent as Video } from "./assets/images/video.svg";
 import isImage from "is-image";
 import isTextPath from "is-text-path";
 import isVideo from "is-video";
-import styled from "styled-components/macro";
+import styled from "styled-components";
 
 const StyledPopover = styled(({ className, ...rest }) => (
   <Popover className={className} overlayClassName={className} {...rest} />
