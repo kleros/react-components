@@ -2,6 +2,7 @@ import { Col, Icon, Row, Collapse } from "antd";
 import React from "react";
 import EvidenceCard from "./evidence-card.js";
 import PropTypes from "prop-types";
+import { ReactComponent as FolderSVG } from "./assets/images/folder.svg";
 
 import "./evidence-timeline.css";
 
@@ -22,7 +23,12 @@ class EvidenceTimeline extends React.Component {
     const { evidence, ruling, metaEvidence } = this.props;
     return (
       <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
-        <Panel style={{ background: "#4d00b4" }} className="primary" key="1">
+        <Panel
+          header={<FolderSVG />}
+          style={{ background: "#4d00b4" }}
+          className="primary"
+          key="1"
+        >
           <div style={{ padding: "35px 10%" }}>
             <Row id="scroll-top">
               <Col
