@@ -3,7 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import EvidenceCard from "./evidence-card";
 
-import { ReactComponent as Folder } from "../assets/images/folder.svg";
+import { ReactComponent as Folder } from "./assets/images/folder.svg";
 const { Panel } = Collapse;
 
 const StyledHeaderCol = styled(Col)`

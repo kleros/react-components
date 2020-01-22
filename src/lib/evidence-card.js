@@ -1,7 +1,7 @@
 import { Card, Col, Row } from "antd";
 import React from "react";
 import styled from "styled-components";
-import { ReactComponent as EtherscanSVG } from "../assets/images/logos/etherscan-logo-circle.svg";
+import { ReactComponent as EtherscanSVG } from "./assets/images/logos/etherscan-logo-circle.svg";
 import Attachment from "./attachment";
 
 const StyledCard = styled(Card)`

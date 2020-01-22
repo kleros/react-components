@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Collapse, Timeline, Card } from "antd";
 import "antd/dist/antd.css";
-import { ReactComponent as Folder } from "../assets/images/folder.svg";
+import { ReactComponent as Folder } from "./assets/images/folder.svg";
 const { Panel } = Collapse;
 
 export const content = {
