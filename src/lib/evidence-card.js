@@ -3,7 +3,6 @@ import React from "react";
 import PropTypes from "prop-types";
 
 import { ReactComponent as EtherscanSVG } from "./assets/images/logos/etherscan-logo-circle.svg";
-import Attachment from "./attachment.js";
 import "./evidence-card.css";
 
 const truncateAddress = address =>
@@ -94,12 +93,7 @@ class EvidenceCard extends React.Component {
                   </div>
                 </div>
               </Col>
-              <Col lg={1}>
-                <Attachment
-                  URI={evidence.evidenceJSON.fileURI}
-                  extension={evidence.evidenceJSON.fileTypeExtension}
-                />
-              </Col>
+              <Col lg={1}></Col>
             </Row>
           </div>
         </div>
