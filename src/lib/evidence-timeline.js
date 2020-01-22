@@ -21,7 +21,15 @@ class EvidenceTimeline extends React.Component {
 
     const { evidence, ruling, metaEvidence } = this.props;
     return (
-      <Collapse defaultActiveKey={["1"]} expandIconPosition="right">
+      <Collapse
+        defaultActiveKey={["1"]}
+        expandIconPosition="right"
+        style={{
+          borderStyle: "solid",
+          borderColor: "#d09cff",
+          borderWidth: "1px"
+        }}
+      >
         <Panel
           header={
             <>

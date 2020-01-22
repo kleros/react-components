@@ -4,3 +4,12 @@ div.ant-collapse-header > * {
 div.ant-collapse-header > * > * {
   color: white;
 }
+
+#root > div > div > div.ant-collapse-content.ant-collapse-content-active {
+  border-style: none;
+  border-radius: 0px 0px 0px 0px;
+  border-width: 0px;
+  border-bottom: 0px;
+  border: 0;
+  border-image-width: 0;
+}
