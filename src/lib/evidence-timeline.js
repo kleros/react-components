@@ -2,7 +2,7 @@ import { Col, Icon, Row, Collapse } from "antd";
 import React from "react";
 import EvidenceCard from "./evidence-card.js";
 import PropTypes from "prop-types";
-
+import "antd/dist/antd.css";
 import "./evidence-timeline.css";
 
 const { Panel } = Collapse;

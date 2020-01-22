@@ -2,7 +2,7 @@ import { Card, Col, Row } from "antd";
 import React from "react";
 import PropTypes from "prop-types";
 
-import { ReactComponent as EtherscanSVG } from "./assets/images/logos/etherscan-logo-circle.svg";
+import "antd/dist/antd.css";
 import "./evidence-card.css";
 
 const truncateAddress = address =>

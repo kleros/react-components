@@ -1,5 +1,3 @@
-import "antd/dist/antd.css";
-
 export { default as Footer } from "./footer.js";
 export { default as Attachment } from "./attachment.js";
 export { default as EvidenceTimeline } from "./evidence-timeline.js";
