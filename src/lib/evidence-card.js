@@ -1,7 +1,7 @@
 import { Card, Col, Row } from "antd";
 import React from "react";
 import { ReactComponent as EtherscanSVG } from "./assets/images/logos/etherscan-logo-circle.svg";
-import Attachment from "./attachment";
+import Attachment from "./attachment.js";
 import "./evidence-card.css";
 
 const truncateAddress = address =>

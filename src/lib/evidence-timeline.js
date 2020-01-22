@@ -1,6 +1,6 @@
 import { Col, Icon, Row, Collapse } from "antd";
 import React from "react";
-import EvidenceCard from "./evidence-card";
+import EvidenceCard from "./evidence-card.js";
 
 import { ReactComponent as Folder } from "./assets/images/folder.svg";
 const { Panel } = Collapse;
