@@ -44,6 +44,7 @@ class Footer extends React.Component {
     };
     const svgStyle = {
       height: "1rem",
+      width: "auto",
       verticalAlign: "text-bottom"
     };
 
