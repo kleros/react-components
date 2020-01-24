@@ -23,7 +23,7 @@ class Footer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      biggerThan768px: window.matchMedia("(min-width: 768px)").matches
+      biggerThan992px: window.matchMedia("(min-width: 992px)").matches
     };
   }
 
@@ -34,8 +34,8 @@ class Footer extends React.Component {
 
   componentDidMount() {
     window
-      .matchMedia("(min-width: 768px)")
-      .addListener(e => this.setState({ biggerThan768px: e.matches }));
+      .matchMedia("(min-width: 992px)")
+      .addListener(e => this.setState({ biggerThan992px: e.matches }));
   }
   render() {
     const anchorStyle = {
@@ -52,7 +52,7 @@ class Footer extends React.Component {
       fill: "white"
     };
 
-    const { biggerThan768px } = this.state || false;
+    const { biggerThan992px } = this.state || false;
     const { appName, contractExplorerURL, repository, locale } = this.props;
 
     return (
@@ -63,9 +63,9 @@ class Footer extends React.Component {
           width: "100%",
           height: "4rem",
           display: "grid",
-          grid: biggerThan768px
-            ? "1fr / [footer-start] 20px [banner] 10fr [title] 10fr [help] 4fr 1fr [social] 5fr 20px [footer-end]"
-            : "1fr / [footer-start] 30px [banner] 9fr [help] 6fr 30px [footer-end]",
+          grid: biggerThan992px
+            ? "1fr / [footer-start] 1fr [banner] 20fr [title] 20fr [help] 8fr 2fr [social] 10fr 1fr [footer-end]"
+            : "1fr / [footer-start] 1fr [banner] 18fr [help] 12fr 1fr [footer-end]",
           background: "#4d00b4",
           alignItems: "center",
           justifyItems: "center"
@@ -78,7 +78,7 @@ class Footer extends React.Component {
         </div>
         <div
           style={{
-            display: biggerThan768px ? "" : "none",
+            display: biggerThan992px ? "" : "none",
             gridColumn: "title"
           }}
         >
@@ -138,7 +138,7 @@ class Footer extends React.Component {
         </div>
         <div
           style={{
-            display: biggerThan768px ? "grid" : "none",
+            display: biggerThan992px ? "grid" : "none",
             grid: "1fr / 1fr 1fr 1fr 1fr 1fr 1fr 1fr",
             gridColumn: "social",
             justifySelf: "stretch",
