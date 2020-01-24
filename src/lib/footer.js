@@ -170,7 +170,7 @@ class Footer extends React.Component {
           </a>
           <a
             style={anchorStyle}
-            href="https://slack.com/kleros"
+            href="https://slack.kleros.io/"
             rel="noopener noreferrer"
             target="_blank"
           >
