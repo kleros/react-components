@@ -13,7 +13,7 @@ class EvidenceTimeline extends React.Component {
     const { ipfsGateway } = this.props;
 
     return (
-      <div className="wrap-collabsible">
+      <div id="evidence-timeline">
         <input
           id="collapsible"
           className="toggle"
