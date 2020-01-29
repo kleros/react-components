@@ -19,7 +19,7 @@ const App = () => (
           evidenceValid: true,
           fileValid: true,
           submittedBy: "0xac96570CF5bb71e557f117651Ce4B100B6d06af8",
-          submittedAt: "26 Nov 2019 23:02 UTC"
+          submittedAt: 1579543075
         }
       ]}
     />
