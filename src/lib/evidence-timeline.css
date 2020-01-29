@@ -60,6 +60,13 @@
   max-height: 100vh;
 }
 
+#evidence-timeline > .toggle + .lbl-toggle + .collapsible-content {
+}
+
+#evidence-timeline > label {
+  border-radius: 7px;
+}
+
 #evidence-timeline > .toggle:checked + .lbl-toggle {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;

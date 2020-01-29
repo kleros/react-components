@@ -14,12 +14,7 @@ class EvidenceTimeline extends React.Component {
 
     return (
       <div id="evidence-timeline">
-        <input
-          id="collapsible"
-          className="toggle"
-          type="checkbox"
-          defaultChecked
-        />
+        <input id="collapsible" className="toggle" type="checkbox" />
         <label htmlFor="collapsible" className="lbl-toggle">
           <svg
             width="21"
