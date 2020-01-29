@@ -96,6 +96,7 @@
 }
 
 #evidence-timeline .evidence > .header > h1 {
+  margin: 0.8rem 0rem;
   grid-column: title;
   display: inline-block;
   color: var(--main-color);
