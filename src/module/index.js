@@ -8,8 +8,26 @@ const archon = new Archon(window.ethereum, "https://ipfs.kleros.io");
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { metaevidence: "", evidences: [] };
+    this.state = {
+      metaevidence: "",
+      evidences: [],
+      ruling: "",
+      currentRuling: ""
+    };
   }
+
+  getCurrentRuling = async () =>
+    archon.arbitrator.getCurrentRuling(
+      "0x988b3A538b618C7A603e1c11Ab82Cd16dbE28069",
+      132
+    );
+
+  getRuling = async () =>
+    archon.arbitrable.getRuling(
+      "0xebcf3bca271b26ae4b162ba560e243055af0e679",
+      "0x988b3A538b618C7A603e1c11Ab82Cd16dbE28069",
+      132
+    );
 
   getMetaEvidence = async () => {
     const disputeLog = await archon.arbitrable.getDispute(
@@ -38,14 +56,15 @@ class App extends React.Component {
       "0x988b3A538b618C7A603e1c11Ab82Cd16dbE28069",
       disputeLog.evidenceGroupID
     );
-    console.log(evidence);
     return evidence;
   };
 
   componentDidMount = async () => {
     const metaevidence = await this.getMetaEvidence();
     const evidences = await this.getEvidence();
-    this.setState({ metaevidence, evidences });
+    const ruling = await this.getRuling();
+    const currentRuling = await this.getCurrentRuling();
+    this.setState({ metaevidence, evidences, ruling, currentRuling });
   };
 
   render() {
@@ -54,6 +73,8 @@ class App extends React.Component {
         <EvidenceTimeline
           metaevidence={this.state.metaevidence}
           evidences={this.state.evidences}
+          ruling={this.state.ruling}
+          currentRuling={this.state.currentRuling}
         />
         <br />
         <Footer

@@ -76,7 +76,7 @@
   border: 1px solid;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
-  padding: 0.5rem 1rem;
+  padding: 1.5rem 1rem;
   border-color: #d09cff;
 }
 
@@ -84,7 +84,10 @@
   border-radius: 12px;
   box-shadow: 0px 6px 36px #bc9cff;
   padding-top: 1rem;
-  margin: 1rem;
+}
+
+#evidence-timeline .evidence::after {
+  border-left: thick solid #ff0000;
 }
 
 #evidence-timeline .evidence .header {
@@ -204,4 +207,23 @@
 
 #evidence-timeline .evidence > .footer > a > svg > path {
   fill: var(--main-color);
+}
+
+#evidence-timeline > div > div > .divider {
+  border-left: 0.1rem solid var(--main-color);
+  height: 3rem;
+  width: min-content;
+  margin: auto;
+  padding: 0;
+}
+
+#evidence-timeline .event {
+  display: block;
+  background-color: var(--main-color);
+  color: white;
+  text-align: center;
+  margin: auto;
+  width: max-content;
+  padding: 0.5rem 1.5rem;
+  border-radius: 300px;
 }
