@@ -68,8 +68,19 @@ class EvidenceTimeline extends React.Component {
     else return null;
   };
 
+  getRulingTitle = (rulingCode, rulingOptions) => {
+    if (rulingCode) return rulingOptions.titles[rulingCode - 1];
+    else return "Refused to Rule";
+  };
+
   render() {
-    const { ipfsGateway } = this.props;
+    const {
+      ipfsGateway,
+      metaevidence,
+      evidences,
+      currentRuling,
+      ruling
+    } = this.props;
     console.log(this.props);
     return (
       <div id="evidence-timeline">
@@ -90,25 +101,26 @@ class EvidenceTimeline extends React.Component {
               fill="white"
             />
           </svg>
-          Evidence ({this.props.evidences.length})
+          Evidence ({evidences.length})
         </label>
         <div className="collapsible-content">
           <div className="content-inner">
             <div className="event">
-              {(this.props.metaevidence &&
-                (this.props.ruling &&
-                  `Jurors ruled: ${
-                    this.props.metaevidence.metaEvidenceJSON.rulingOptions
-                      .titles[this.props.ruling.ruling]
-                  }`)) ||
-                (this.props.metaevidence &&
-                  `Current ruling: ${
-                    this.props.metaevidence.metaEvidenceJSON.rulingOptions
-                      .titles[this.props.currentRuling]
-                  }`) ||
+              {(metaevidence &&
+                (ruling &&
+                  `Jurors ruled: ${this.getRulingTitle(
+                    ruling.ruling,
+                    metaevidence.metaEvidenceJSON.rulingOptions
+                  )}`)) ||
+                (metaevidence &&
+                  currentRuling >= 0 &&
+                  `Current ruling: ${this.getRulingTitle(
+                    currentRuling,
+                    metaevidence.metaEvidenceJSON.rulingOptions
+                  )}`) ||
                 "Fetching..."}
             </div>
-            {this.props.evidences
+            {evidences
               .sort((a, b) => {
                 if (a.submittedAt > b.submittedAt) return -1;
                 else if (a.submittedAt < b.submittedAt) return 1;
