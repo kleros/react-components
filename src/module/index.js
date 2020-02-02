@@ -74,7 +74,7 @@ class App extends React.Component {
           metaevidence={this.state.metaevidence}
           evidences={this.state.evidences}
           ruling={this.state.ruling}
-          currentRuling={0}
+          currentRuling={this.state.currentRuling}
         />
         <br />
         <Footer

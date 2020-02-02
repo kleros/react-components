@@ -200,7 +200,11 @@ class EvidenceTimeline extends React.Component {
 }
 
 EvidenceTimeline.propTypes = {
-  ipfsGateway: PropTypes.string.isRequired
+  ipfsGateway: PropTypes.string.isRequired,
+  metaevidence: PropTypes.object,
+  evidences: PropTypes.array,
+  ruling: PropTypes.object,
+  currentRuling: PropTypes.string
 };
 
 EvidenceTimeline.defaultProps = {
