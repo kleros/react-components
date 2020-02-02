@@ -112,6 +112,8 @@
 
 #evidence-timeline .evidence p {
   padding: 0rem 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 #evidence-timeline .evidence .temp > span.sender {
