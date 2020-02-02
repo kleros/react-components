@@ -188,12 +188,17 @@
     display: none;
   }
 }
+#evidence-timeline > label > svg {
+  height: 1.2rem;
+  width: 1.2rem;
+  vertical-align: middle;
+}
 
 #evidence-timeline .evidence > .footer > a > svg {
   grid-column: link;
   float: right;
-  width: auto;
-  height: 1.8rem;
+  height: 2rem;
+  width: 2rem;
 }
 
 #evidence-timeline .evidence > .footer > a > svg > path {
