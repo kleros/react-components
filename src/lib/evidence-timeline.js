@@ -115,7 +115,7 @@ class EvidenceTimeline extends React.Component {
                   </>
                 ))) ||
                 (metaevidence &&
-                  currentRuling >= 0 &&
+                  currentRuling > 0 &&
                   `Current ruling: ${this.getRulingTitle(
                     currentRuling,
                     metaevidence.metaEvidenceJSON.rulingOptions
