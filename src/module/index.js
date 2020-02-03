@@ -77,10 +77,10 @@ class App extends React.Component {
         <EvidenceTimeline
           key={0}
           metaevidence={this.state.metaevidence}
-          evidences={this.state.evidences}
-          ruling={this.state.ruling}
+          evidences={[]}
+          ruling={null}
           currentRuling={this.state.currentRuling}
-          dispute={this.state.disputeEvent}
+          dispute={null}
         />
         <br />
         <Footer

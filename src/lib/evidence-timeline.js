@@ -115,7 +115,7 @@ class EvidenceTimeline extends React.Component {
                   </>
                 ))) ||
                 (metaevidence &&
-                  currentRuling > 0 &&
+                  typeof currentRuling != undefined &&
                   `Current ruling: ${this.getRulingTitle(
                     currentRuling,
                     metaevidence.metaEvidenceJSON.rulingOptions
@@ -213,7 +213,7 @@ EvidenceTimeline.propTypes = {
   metaevidence: PropTypes.object,
   evidences: PropTypes.array,
   ruling: PropTypes.object,
-  currentRuling: PropTypes.string
+  currentRuling: PropTypes.number
 };
 
 EvidenceTimeline.defaultProps = {
