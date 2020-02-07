@@ -144,7 +144,7 @@
 
   #evidence-timeline .evidence > .footer {
     display: grid;
-    grid: 1fr / [submitInfo] 20fr [link] 3fr [footer-end];
+    grid: 1fr / [supportingSide] 1fr 14px [submitInfo] 100fr [link] 10fr [footer-end];
 
     padding: 1.5rem;
     background-color: var(--second-color);
@@ -168,6 +168,10 @@
     border-bottom: 1px solid;
     border-color: #e8e8e8;
     margin: 0rem 2rem;
+  }
+
+  #evidence-timeline div.evidence-side {
+    display: none;
   }
 
   #evidence-timeline .evidence > .footer {
@@ -196,6 +200,9 @@
   height: 1.2rem;
   width: 1.2rem;
   vertical-align: middle;
+}
+#evidence-timeline div.evidence-side {
+  align-self: end;
 }
 
 #evidence-timeline .evidence > .footer > a > svg {

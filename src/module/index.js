@@ -77,7 +77,7 @@ class App extends React.Component {
         <EvidenceTimeline
           key={0}
           metaevidence={this.state.metaevidence}
-          evidences={[]}
+          evidences={this.state.evidences}
           ruling={null}
           currentRuling={this.state.currentRuling}
           dispute={null}
