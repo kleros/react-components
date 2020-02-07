@@ -227,11 +227,13 @@ class EvidenceTimeline extends React.Component {
                     </div>
                     <p>{evidence.evidenceJSON.description}</p>
                     <div className="footer">
-                      <div className="evidence-side">
-                        {this.getSupportingSideIcon(
-                          evidence.evidenceJSON.evidenceSide
-                        )}
-                      </div>
+                      {evidence.evidenceJSON.evidenceSide && (
+                        <div className="evidence-side">
+                          {this.getSupportingSideIcon(
+                            evidence.evidenceJSON.evidenceSide
+                          )}
+                        </div>
+                      )}
                       <div className="temp">
                         <span className="sender">
                           Submitted by:{" "}
