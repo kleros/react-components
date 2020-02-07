@@ -142,9 +142,19 @@
     margin: 0rem 1.5rem;
   }
 
-  #evidence-timeline .evidence > .footer {
+  #evidence-timeline .evidence > .footer-true {
     display: grid;
     grid: 1fr / [supportingSide] 1fr 14px [submitInfo] 100fr [link] 10fr [footer-end];
+
+    padding: 1.5rem;
+    background-color: var(--second-color);
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+  }
+
+  #evidence-timeline .evidence > .footer-false {
+    display: grid;
+    grid: 1fr / [submitInfo] 100fr [link] 10fr [footer-end];
 
     padding: 1.5rem;
     background-color: var(--second-color);

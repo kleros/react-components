@@ -136,12 +136,7 @@ class EvidenceTimeline extends React.Component {
     console.log(this.props);
     return (
       <div id="evidence-timeline">
-        <input
-          id="collapsible"
-          className="toggle"
-          type="checkbox"
-          defaultChecked
-        />
+        <input id="collapsible" className="toggle" type="checkbox" />
         <label htmlFor="collapsible" className="lbl-toggle">
           <svg
             fill="none"
@@ -226,8 +221,11 @@ class EvidenceTimeline extends React.Component {
                       </a>
                     </div>
                     <p>{evidence.evidenceJSON.description}</p>
-                    <div className="footer">
-                      {evidence.evidenceJSON.evidenceSide && (
+                    <div
+                      className={`footer-${evidence.evidenceJSON.evidenceSide !=
+                        undefined}`}
+                    >
+                      {evidence.evidenceJSON.evidenceSide != undefined && (
                         <div className="evidence-side">
                           {this.getSupportingSideIcon(
                             evidence.evidenceJSON.evidenceSide
