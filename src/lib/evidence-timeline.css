@@ -205,6 +205,10 @@
   align-self: end;
 }
 
+#evidence-timeline div.evidence-side > svg {
+  vertical-align: sub;
+}
+
 #evidence-timeline .evidence > .footer > a > svg {
   grid-column: link;
   float: right;
