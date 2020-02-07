@@ -142,7 +142,7 @@
     margin: 0rem 1.5rem;
   }
 
-  #evidence-timeline .evidence > .footer-true {
+  #evidence-timeline .evidence > .footer {
     display: grid;
     grid: 1fr / [supportingSide] 1fr 14px [submitInfo] 100fr [link] 10fr [footer-end];
 
