@@ -222,7 +222,11 @@ class EvidenceTimeline extends React.Component {
                     </div>
                     <p>{evidence.evidenceJSON.description}</p>
                     <div
+<<<<<<< HEAD
                       className={`footer-${evidence.evidenceJSON.evidenceSide !=
+=======
+                      className={`footer ${evidence.evidenceJSON.evidenceSide !=
+>>>>>>> fix(evidence-timeline): css specifity
                         undefined}`}
                     >
                       {evidence.evidenceJSON.evidenceSide != undefined && (

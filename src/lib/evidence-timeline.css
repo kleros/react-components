@@ -152,7 +152,7 @@
     border-bottom-right-radius: 12px;
   }
 
-  #evidence-timeline .evidence > .footer-false {
+  #evidence-timeline .evidence > .footer.false {
     display: grid;
     grid: 1fr / [submitInfo] 100fr [link] 10fr [footer-end];
 
@@ -165,6 +165,10 @@
   #evidence-timeline .evidence .temp {
     display: inline-block;
     grid-column: submitInfo;
+  }
+
+  #evidence-timeline div.evidence-side {
+    grid-column: supportingSide;
   }
 
   #evidence-timeline .evidence > .header > a {
