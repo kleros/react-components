@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import clsx from "clsx";
 import "./footer.css";
 
 export const content = {
@@ -21,29 +22,30 @@ export const content = {
 const DEFAULT_LOCALE = "en";
 
 class Footer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      biggerThan992px: window.matchMedia("(min-width: 992px)").matches
-    };
-  }
-
   getContent = (locale, key) =>
     Object.keys(content).includes(locale)
       ? content[locale][key]
       : content[DEFAULT_LOCALE][key];
 
-  componentDidMount() {
-    window
-      .matchMedia("(min-width: 992px)")
-      .addListener(e => this.setState({ biggerThan992px: e.matches }));
-  }
   render() {
-    const { biggerThan992px } = this.state || false;
-    const { appName, contractExplorerURL, repository, locale } = this.props;
+    const {
+      appName,
+      contractExplorerURL,
+      repository,
+      locale,
+      footerElProps
+    } = this.props;
+
+    const {
+      className: footerCustomClassName = "",
+      ...restFooterElProps
+    } = footerElProps;
 
     return (
-      <footer className="g-kleros_footer">
+      <footer
+        className={clsx("g-kleros_footer", footerCustomClassName)}
+        {...restFooterElProps}
+      >
         <div className="g-kleros_footer__banner">
           <a href="https://kleros.io" className="g-kleros_footer__anchor">
             {this.getContent(locale, "find-out")}
@@ -110,13 +112,12 @@ class Footer extends React.Component {
             target="_blank"
           >
             <svg
-              className="g-kleros_footer__icon"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
               data-icon="github"
-              className="svg-inline--fa fa-github fa-w-16"
+              className="g-kleros_footer__icon svg-inline--fa fa-github fa-w-16"
               role="img"
               viewBox="0 0 496 512"
             >
@@ -133,13 +134,12 @@ class Footer extends React.Component {
             target="_blank"
           >
             <svg
-              className="g-kleros_footer__icon"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
               data-icon="slack"
-              className="svg-inline--fa fa-slack fa-w-14"
+              className="g-kleros_footer__icon svg-inline--fa fa-slack fa-w-14"
               role="img"
               viewBox="0 0 448 512"
             >
@@ -157,13 +157,12 @@ class Footer extends React.Component {
             target="_blank"
           >
             <svg
-              className="g-kleros_footer__icon"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
               data-icon="reddit-alien"
-              className="svg-inline--fa fa-reddit-alien fa-w-16"
+              className="g-kleros_footer__icon svg-inline--fa fa-reddit-alien fa-w-16"
               role="img"
               viewBox="0 0 512 512"
             >
@@ -180,13 +179,12 @@ class Footer extends React.Component {
             target="_blank"
           >
             <svg
-              className="g-kleros_footer__icon"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
               data-icon="twitter"
-              className="svg-inline--fa fa-twitter fa-w-16"
+              className="g-kleros_footer__icon svg-inline--fa fa-twitter fa-w-16"
               role="img"
               viewBox="0 0 512 512"
             >
@@ -259,13 +257,12 @@ class Footer extends React.Component {
             target="_blank"
           >
             <svg
-              className="g-kleros_footer__icon"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
               data-icon="telegram-plane"
-              className="svg-inline--fa fa-telegram-plane fa-w-24"
+              className="g-kleros_footer__icon svg-inline--fa fa-telegram-plane fa-w-24"
               role="img"
               viewBox="0 0 448 512"
             >
@@ -282,13 +279,12 @@ class Footer extends React.Component {
             target="_blank"
           >
             <svg
-              className="g-kleros_footer__icon"
               xmlns="http://www.w3.org/2000/svg"
               aria-hidden="true"
               focusable="false"
               data-prefix="fab"
               data-icon="linkedin-in"
-              className="svg-inline--fa fa-linkedin-in fa-w-14"
+              className="g-kleros_footer__icon svg-inline--fa fa-linkedin-in fa-w-14"
               role="img"
               viewBox="0 0 448 512"
             >
@@ -309,14 +305,16 @@ Footer.defaultProps = {
   contractExplorerURL:
     "https://etherscan.io/address/0x988b3a538b618c7a603e1c11ab82cd16dbe28069#code",
   repository: "https://github.com/kleros",
-  locale: "en"
+  locale: "en",
+  footerElProps: {}
 };
 
 Footer.propTypes = {
   appName: PropTypes.string.isRequired,
   contractExplorerURL: PropTypes.string.isRequired,
   repository: PropTypes.string,
-  locale: PropTypes.oneOf(Object.keys(content))
+  locale: PropTypes.oneOf(Object.keys(content)),
+  footerElProps: PropTypes.object
 };
 
 export default Footer;
