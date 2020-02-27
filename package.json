@@ -46,6 +46,7 @@
   },
   "dependencies": {
     "@kleros/archon": "^0.10.1",
+    "clsx": "^1.1.0",
     "is-image": "^3.0.0",
     "is-text-path": "^2.0.0",
     "is-video": "^1.0.1"
