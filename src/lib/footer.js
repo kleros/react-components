@@ -33,19 +33,12 @@ class Footer extends React.Component {
       contractExplorerURL,
       repository,
       locale,
-      footerElProps
+      footerElProps,
+      className
     } = this.props;
 
-    const {
-      className: footerCustomClassName = "",
-      ...restFooterElProps
-    } = footerElProps;
-
     return (
-      <footer
-        className={clsx("g-kleros_footer", footerCustomClassName)}
-        {...restFooterElProps}
-      >
+      <footer className={clsx("g-kleros_footer", className)} {...footerElProps}>
         <div className="g-kleros_footer__banner">
           <a href="https://kleros.io" className="g-kleros_footer__anchor">
             {this.getContent(locale, "find-out")}
@@ -306,7 +299,8 @@ Footer.defaultProps = {
     "https://etherscan.io/address/0x988b3a538b618c7a603e1c11ab82cd16dbe28069#code",
   repository: "https://github.com/kleros",
   locale: "en",
-  footerElProps: {}
+  footerElProps: {},
+  className: ""
 };
 
 Footer.propTypes = {
@@ -314,7 +308,8 @@ Footer.propTypes = {
   contractExplorerURL: PropTypes.string.isRequired,
   repository: PropTypes.string,
   locale: PropTypes.oneOf(Object.keys(content)),
-  footerElProps: PropTypes.object
+  footerElProps: PropTypes.object,
+  className: PropTypes.string
 };
 
 export default Footer;
