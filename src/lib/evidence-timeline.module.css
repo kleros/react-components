@@ -4,15 +4,32 @@
   font-family: Roboto;
 }
 
-#evidence-timeline {
-  margin-bottom: 1.2rem 0;
+button:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
-#evidence-timeline > input[type="checkbox"] {
+hr {
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.evidence-button {
+  display: block;
+  margin: auto;
+  background-color: #009aff;
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3px;
+  font-family: Roboto;
+  font-size: 1rem;
+  border-style: hidden;
+}
+
+input[type="checkbox"] {
   display: none;
 }
 
-#evidence-timeline > .lbl-toggle {
+.lbl-toggle {
   display: block;
 
   font-weight: bold;
@@ -21,7 +38,6 @@
 
   padding: 1rem;
   margin: 0;
-
   color: white;
   background: var(--main-color);
 
@@ -33,7 +49,7 @@
   transition: all 0.25s ease-out;
 }
 
-#evidence-timeline > .lbl-toggle::before {
+.lbl-toggle::before {
   content: " ";
   display: inline-block;
 
@@ -46,33 +62,33 @@
   transition: transform 0.2s ease-out;
 }
 
-#evidence-timeline > .toggle:checked + .lbl-toggle::before {
+.toggle:checked + .lbl-toggle::before {
   transform: rotate(90deg) translateX(-3px);
 }
 
-#evidence-timeline > .collapsible-content {
+.collapsible-content {
   max-height: 0px;
   overflow: hidden;
   transition: max-height 0.25s ease-in-out;
 }
 
-#evidence-timeline > .toggle:checked + .lbl-toggle + .collapsible-content {
+.toggle:checked + .lbl-toggle + .collapsible-content {
   max-height: 100%;
 }
 
-#evidence-timeline > .toggle + .lbl-toggle + .collapsible-content {
+.toggle + .lbl-toggle + .collapsible-content {
 }
 
-#evidence-timeline > label {
+label {
   border-radius: 7px;
 }
 
-#evidence-timeline > .toggle:checked + .lbl-toggle {
+.toggle:checked + .lbl-toggle {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-#evidence-timeline > .collapsible-content .content-inner {
+.collapsible-content .content-inner {
   border: 1px solid;
   border-bottom-left-radius: 7px;
   border-bottom-right-radius: 7px;
@@ -80,17 +96,17 @@
   border-color: #d09cff;
 }
 
-#evidence-timeline .evidence {
+.evidence {
   border-radius: 12px;
   box-shadow: 0px 6px 36px #bc9cff;
   padding-top: 1rem;
 }
 
-#evidence-timeline .evidence::after {
+.evidence::after {
   border-left: thick solid #ff0000;
 }
 
-#evidence-timeline .evidence .header {
+.evidence .header {
   display: grid;
   grid: 1fr / [title] 20fr [etherscan] 3fr [footer-end];
   border-bottom: 1px solid;
@@ -98,14 +114,14 @@
   margin: 0rem 1.5rem;
 }
 
-#evidence-timeline .evidence .header > a > svg {
+.evidence .header > a > svg {
   grid-column: etherscan;
   float: right;
   width: auto;
   height: 1.8rem;
 }
 
-#evidence-timeline .evidence > .header > h1 {
+.evidence > .header > h1 {
   margin: 0.8rem 0rem;
   grid-column: title;
   display: inline-block;
@@ -113,28 +129,28 @@
   font-size: large;
 }
 
-#evidence-timeline .evidence p {
+.evidence p {
   padding: 0rem 1.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
 
-#evidence-timeline .evidence .temp > span.sender {
+.evidence .temp > span.sender {
   color: var(--main-color);
   font-weight: bold;
   line-height: 2rem;
 }
 
-#evidence-timeline .evidence .temp > span.timestamp {
+.evidence .temp > span.timestamp {
   color: var(--main-color);
 }
 
-#evidence-timeline .evidence > .footer > a {
+.evidence > .footer > a {
   align-self: center;
 }
 
 @media only screen and (min-width: 400px) {
-  #evidence-timeline .evidence .header {
+  .evidence .header {
     display: grid;
     grid: 1fr / [title] 20fr [etherscan] 3fr [footer-end];
     border-bottom: 1px solid;
@@ -142,7 +158,7 @@
     margin: 0rem 1.5rem;
   }
 
-  #evidence-timeline .evidence > .footer {
+  .evidence > .footer {
     display: grid;
     grid: 1fr / [supportingSide] 1fr 14px [submitInfo] 100fr [link] 10fr [footer-end];
 
@@ -152,7 +168,7 @@
     border-bottom-right-radius: 12px;
   }
 
-  #evidence-timeline .evidence > .footer.false {
+  .evidence > .footer.false {
     display: grid;
     grid: 1fr / [submitInfo] 100fr [link] 10fr [footer-end];
 
@@ -162,21 +178,21 @@
     border-bottom-right-radius: 12px;
   }
 
-  #evidence-timeline .evidence .temp {
+  .evidence .temp {
     display: inline-block;
     grid-column: submitInfo;
   }
 
-  #evidence-timeline div.evidence-side {
+  div.evidence-side {
     grid-column: supportingSide;
   }
 
-  #evidence-timeline .evidence > .header > a {
+  .evidence > .header > a {
     align-self: center;
   }
 }
 @media only screen and (max-width: 400px) {
-  #evidence-timeline .evidence .header {
+  .evidence .header {
     display: grid;
     grid: 1fr / [title] 1fr [footer-end];
     border-bottom: 1px solid;
@@ -184,11 +200,11 @@
     margin: 0rem 2rem;
   }
 
-  #evidence-timeline div.evidence-side {
+  div.evidence-side {
     display: none;
   }
 
-  #evidence-timeline .evidence > .footer {
+  .evidence > .footer {
     display: grid;
     grid: 1fr / [link] 1fr [footer-end];
 
@@ -198,43 +214,43 @@
     border-bottom-right-radius: 12px;
   }
 
-  #evidence-timeline .evidence .temp {
+  .evidence .temp {
     display: none;
   }
 
-  #evidence-timeline .evidence > .footer > a {
+  .evidence > .footer > a {
     justify-self: center;
   }
 
-  #evidence-timeline .evidence .header > a > svg {
+  .evidence .header > a > svg {
     display: none;
   }
 }
-#evidence-timeline > label > svg {
+label > svg {
   height: 1.2rem;
   width: 1.2rem;
   vertical-align: middle;
 }
-#evidence-timeline div.evidence-side {
+div.evidence-side {
   align-self: end;
 }
 
-#evidence-timeline div.evidence-side > svg {
+div.evidence-side > svg {
   vertical-align: sub;
 }
 
-#evidence-timeline .evidence > .footer > a > svg {
+.evidence > .footer > a > svg {
   grid-column: link;
   float: right;
   height: 2rem;
   width: 2rem;
 }
 
-#evidence-timeline .evidence > .footer > a > svg > path {
+.evidence > .footer > a > svg > path {
   fill: var(--main-color);
 }
 
-#evidence-timeline > div > div > .divider {
+div > div > .divider {
   border-left: 0.1rem solid var(--main-color);
   height: 3rem;
   width: min-content;
@@ -242,7 +258,7 @@
   padding: 0;
 }
 
-#evidence-timeline .event {
+.event {
   display: block;
   background-color: var(--main-color);
   color: white;
@@ -253,6 +269,100 @@
   border-radius: 300px;
 }
 
-#evidence-timeline .event p {
+.event p {
   margin: 0;
+}
+
+.modal-header {
+  background-color: var(--main-color);
+  color: white;
+  height: 3rem;
+  margin: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.modal {
+  /* This way it could be display flex or grid or whatever also. */
+  display: grid;
+
+  /* Probably need media queries here */
+  width: 80vw;
+
+  position: fixed;
+
+  z-index: 100;
+
+  left: 50%;
+  top: 50%;
+
+  /* Use this for centering if unknown width/height */
+  transform: translate(-50%, -50%);
+
+  /* If known, negative margins are probably better (less chance of blurry text). */
+  /* margin: -200px 0 0 -200px; */
+
+  background: white;
+  box-shadow: 0 0 60px 10px rgba(0, 0, 0, 0.9);
+}
+.closed {
+  display: none;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 50;
+
+  background: rgba(0, 0, 0, 0.6);
+}
+.modal-guts {
+  display: grid;
+  grid-gap: 1rem;
+  overflow: auto;
+  padding: 1rem 2.5rem 1rem 1rem;
+}
+
+.modal .close-button {
+  display: inline-block;
+  /* don't need to go crazy with z-index here, just sits over .modal-guts */
+
+  /* needs to look OK with or without scrollbar */
+
+  border: 0;
+  background: black;
+  color: white;
+  font-size: 1.3rem;
+}
+
+#submit-button {
+  display: inline-block;
+}
+
+.open-button {
+  border: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: lightgreen;
+  color: white;
+  border-radius: 1rem;
+  font-size: 1.5rem;
+}
+
+.modal-container {
+  position: fixed;
+  background-color: #fff;
+  width: 70vw;
+  left: 50%;
+  border-radius: 0.5rem;
+  -webkit-transform: translate(-50%, -200%);
+  -ms-transform: translate(-50%, -200%);
+  transform: translate(-50%, -200%);
+  -webkit-transition: -webkit-transform 200ms ease-out;
+  transition: transform 200ms ease-out;
 }
