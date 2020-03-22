@@ -92,7 +92,7 @@ class EvidenceTimeline extends React.Component {
       console.log(result);
       if (result)
         await this.setState({
-          evidenceDocument: `/ipfs/${result[1].hash}${result[0].path}`
+          evidenceDocument: `${result[1].hash}${result[0].path}`
         });
     });
   };
