@@ -312,7 +312,7 @@ div > div > .divider {
 .modal-header h1 {
   font-size: 1.32rem;
   font-weight: normal;
-  padding: 0.75rem 1.25rem;
+  margin: 0;
 }
 
 .modal {
