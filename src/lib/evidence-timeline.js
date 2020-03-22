@@ -11,6 +11,13 @@ class EvidenceTimeline extends React.Component {
   constructor(props) {
     super(props);
 
+    var root = document.documentElement;
+
+    document.addEventListener("resize", () => {
+      root.style.setProperty("--screen-x", window.screenX);
+      root.style.setProperty("--screen-y", window.screenY);
+    });
+
     this.state = {
       modalExtraClass: "closed",
       evidenceDescription: "",
@@ -26,7 +33,7 @@ class EvidenceTimeline extends React.Component {
       address.length
     )}`;
 
-  handleEvidenceButtonClick = e => {
+  handleModalOpenClose = e => {
     const id = e.target.id;
     this.setState({ modalExtraClass: id == "evidence-button" ? "" : "closed" });
   };
@@ -243,7 +250,7 @@ class EvidenceTimeline extends React.Component {
               type="button"
               id="evidence-button"
               className={styles["evidence-button"]}
-              onClick={this.handleEvidenceButtonClick}
+              onClick={this.handleModalOpenClose}
             >
               Submit Evidence
             </button>
@@ -371,80 +378,82 @@ class EvidenceTimeline extends React.Component {
               styles[this.state.modalExtraClass]
             )}
             id="modal-overlay"
-            onClick={this.handleEvidenceButtonClick}
+            onClick={this.handleModalOpenClose}
           ></div>
-
-          <div
-            className={clsx(styles.modal, styles[this.state.modalExtraClass])}
-            id="modal"
-          >
-            <div className={styles["modal-header"]}>
-              <h1>Submit Evidence</h1>
-            </div>
-            <div className={styles["modal-guts"]}>
-              <div className={styles.evidenceTitle}>
-                <label htmlFor="evidence-title">Evidence Title</label>
-                <input id="evidence-title" type="text"></input>
+          <div className={styles.modalContainer}>
+            <div
+              className={clsx(styles.modal, styles[this.state.modalExtraClass])}
+              id="modal"
+            >
+              <div className={styles["modal-header"]}>
+                <h1>Submit Evidence</h1>
               </div>
-              <div className={styles.evidenceDescription}>
-                <label htmlFor="evidence-description">
-                  Evidence Description
-                </label>
-                <textarea
-                  id="evidence-description"
-                  type="textarea"
-                  rows="3"
-                ></textarea>
-              </div>
-              <div className={styles.dropzoneDiv}>
-                <label htmlFor="dropzone">
-                  Upload Evidence Document (optional)
-                </label>
-                <Dropzone onDrop={this.handleDrop} id="dropzone">
-                  {({ getInputProps, getRootProps }) => (
-                    <section className={styles["dropzone"]}>
-                      <div
-                        {...getRootProps()}
-                        className={styles["vertical-center"]}
-                      >
-                        <input {...getInputProps()} />
-                        <p>
-                          {(fileInput && fileInput.path) ||
-                            "Drag 'n' drop some files here, or click to select files."}
-                        </p>
-                      </div>
-                    </section>
-                  )}
-                </Dropzone>
-              </div>
-              {this.props.metaevidence && (
-                <div className={styles.evidenceSide}>
-                  <div className={styles.discussion}>
-                    <input type="radio" name="side" defaultChecked />
-                    <label>Discussion</label>
-                  </div>
-                  <div className={styles.sideZero}>
-                    <input type="radio" name="side" />
-                    <label>{`I'm supporting "${
-                      this.props.metaevidence.metaEvidenceJSON.rulingOptions
-                        .titles[0]
-                    }"`}</label>
-                  </div>
-                  <div className={styles.sideOne}>
-                    <input type="radio" name="side" />
-                    <label>{`I'm supporting "${
-                      this.props.metaevidence.metaEvidenceJSON.rulingOptions
-                        .titles[1]
-                    }"`}</label>
-                  </div>
+              <div className={styles["modal-guts"]}>
+                <div className={styles.evidenceTitle}>
+                  <label htmlFor="evidence-title">Evidence Title</label>
+                  <input id="evidence-title" type="text"></input>
                 </div>
-              )}
-              <button
-                className={styles["submit-button"]}
-                onClick={this.handleSubmitEvidenceButtonClick}
-              >
-                Submit
-              </button>
+                <div className={styles.evidenceDescription}>
+                  <label htmlFor="evidence-description">
+                    Evidence Description
+                  </label>
+                  <textarea
+                    id="evidence-description"
+                    type="textarea"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <div className={styles.dropzoneDiv}>
+                  <label htmlFor="dropzone">
+                    Upload Evidence Document (optional)
+                  </label>
+                  <Dropzone onDrop={this.handleDrop} id="dropzone">
+                    {({ getInputProps, getRootProps }) => (
+                      <section className={styles["dropzone"]}>
+                        <div
+                          {...getRootProps()}
+                          className={styles["vertical-center"]}
+                        >
+                          <input {...getInputProps()} />
+                          <p>
+                            {(fileInput && fileInput.path) ||
+                              "Drag 'n' drop some files here, or click to select files."}
+                          </p>
+                        </div>
+                      </section>
+                    )}
+                  </Dropzone>
+                </div>
+                {this.props.metaevidence && (
+                  <div className={styles.evidenceSide}>
+                    <div className={styles.discussion}>
+                      <input type="radio" name="side" defaultChecked />
+                      <label>Discussion</label>
+                    </div>
+                    <div className={styles.sideZero}>
+                      <input type="radio" name="side" />
+                      <label>{`I'm supporting "${
+                        this.props.metaevidence.metaEvidenceJSON.rulingOptions
+                          .titles[0]
+                      }"`}</label>
+                    </div>
+                    <div className={styles.sideOne}>
+                      <input type="radio" name="side" />
+                      <label>{`I'm supporting "${
+                        this.props.metaevidence.metaEvidenceJSON.rulingOptions
+                          .titles[1]
+                      }"`}</label>
+                    </div>
+                  </div>
+                )}
+                <button
+                  type="button"
+                  className={styles["submit-button"]}
+                  onClick={this.handleSubmitEvidenceButtonClick}
+                >
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
         </div>
