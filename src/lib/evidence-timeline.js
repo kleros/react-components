@@ -31,6 +31,62 @@ class EvidenceTimeline extends React.Component {
     this.setState({ modalExtraClass: id == "evidence-button" ? "" : "closed" });
   };
 
+  handleSubmitEvidenceButtonClick = async event => {
+    const {
+      evidenceDescription,
+      evidenceDocument,
+      evidenceTitle,
+      support
+    } = this.state;
+    await this.setState({
+      awaitingConfirmation: true
+    });
+
+    try {
+      await this.props.submitEvidenceCallback({
+        evidenceDescription,
+        evidenceDocument,
+        evidenceTitle,
+        supportingSide: support
+      });
+
+      await this.setState({
+        awaitingConfirmation: false,
+        evidenceTitle: "",
+        evidenceDescription: "",
+        fileInput: "",
+        support: 0
+      });
+    } catch (err) {
+      console.log("err");
+      await this.setState({
+        awaitingConfirmation: false
+      });
+    }
+  };
+
+  handleDrop = async acceptedFiles => {
+    console.log(acceptedFiles);
+    this.setState({ fileInput: acceptedFiles[0] });
+
+    var reader = new FileReader();
+    reader.readAsArrayBuffer(acceptedFiles[0]);
+    reader.addEventListener("loadend", async () => {
+      const buffer = Buffer.from(reader.result);
+
+      const result = await this.props.publishCallback(
+        acceptedFiles[0].name,
+        buffer
+      );
+
+      console.log(result);
+      if (result)
+        await this.setState({
+          evidenceDocument: `/ipfs/${result[1].hash}${result[0].path}`
+        });
+    });
+  };
+
   getSupportingSideIcon = supportingSide => {
     if (supportingSide == 1)
       return (
@@ -162,7 +218,12 @@ class EvidenceTimeline extends React.Component {
     console.log(this.props);
     return (
       <div id="evidence-timeline">
-        <input id="collapsible" className={styles.toggle} type="checkbox" />
+        <input
+          id="collapsible"
+          className={styles.toggle}
+          type="checkbox"
+          defaultChecked
+        />
         <label htmlFor="collapsible" className={styles["lbl-toggle"]}>
           <svg
             fill="none"
@@ -321,30 +382,66 @@ class EvidenceTimeline extends React.Component {
               <h1>Submit Evidence</h1>
             </div>
             <div className={styles["modal-guts"]}>
-              <label htmlFor="evidence-title">Evidence Title</label>
-              <input id="evidence-title" type="text"></input>
-              <label htmlFor="evidence-description">Evidence Description</label>
-              <input id="evidence-description" type="text"></input>
-              <label htmlFor="">Upload Evidence Document (optional)</label>
-              <Dropzone onDrop={this.handleDrop}>
-                {({ getInputProps, getRootProps }) => (
-                  <section id="dropzone">
-                    <div
-                      {...getRootProps()}
-                      className={styles["vertical-center"]}
-                    >
-                      <input {...getInputProps()} />
-                      <h5>
-                        {(fileInput && fileInput.path) ||
-                          "Drag 'n' drop some files here, or click to select files."}
-                      </h5>
-                    </div>
-                  </section>
-                )}
-              </Dropzone>
+              <div className={styles.evidenceTitle}>
+                <label htmlFor="evidence-title">Evidence Title</label>
+                <input id="evidence-title" type="text"></input>
+              </div>
+              <div className={styles.evidenceDescription}>
+                <label htmlFor="evidence-description">
+                  Evidence Description
+                </label>
+                <textarea
+                  id="evidence-description"
+                  type="textarea"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div className={styles.dropzoneDiv}>
+                <label htmlFor="dropzone">
+                  Upload Evidence Document (optional)
+                </label>
+                <Dropzone onDrop={this.handleDrop} id="dropzone">
+                  {({ getInputProps, getRootProps }) => (
+                    <section className={styles["dropzone"]}>
+                      <div
+                        {...getRootProps()}
+                        className={styles["vertical-center"]}
+                      >
+                        <input {...getInputProps()} />
+                        <p>
+                          {(fileInput && fileInput.path) ||
+                            "Drag 'n' drop some files here, or click to select files."}
+                        </p>
+                      </div>
+                    </section>
+                  )}
+                </Dropzone>
+              </div>
+              {this.props.metaevidence && (
+                <div className={styles.evidenceSide}>
+                  <div className={styles.discussion}>
+                    <input type="radio" name="side" defaultChecked />
+                    <label>Discussion</label>
+                  </div>
+                  <div className={styles.sideZero}>
+                    <input type="radio" name="side" />
+                    <label>{`I'm supporting "${
+                      this.props.metaevidence.metaEvidenceJSON.rulingOptions
+                        .titles[0]
+                    }"`}</label>
+                  </div>
+                  <div className={styles.sideOne}>
+                    <input type="radio" name="side" />
+                    <label>{`I'm supporting "${
+                      this.props.metaevidence.metaEvidenceJSON.rulingOptions
+                        .titles[1]
+                    }"`}</label>
+                  </div>
+                </div>
+              )}
               <button
-                id="submit-button"
-                onClick={this.handleEvidenceButtonClick}
+                className={styles["submit-button"]}
+                onClick={this.handleSubmitEvidenceButtonClick}
               >
                 Submit
               </button>
@@ -362,11 +459,15 @@ EvidenceTimeline.propTypes = {
   evidences: PropTypes.array,
   ruling: PropTypes.object,
   currentRuling: PropTypes.number,
-  evidenceButtonHandler: PropTypes.func
+  evidenceButtonHandler: PropTypes.func,
+  publishCallback: PropTypes.func,
+  submitEvidenceCallback: PropTypes.func
 };
 
 EvidenceTimeline.defaultProps = {
-  ipfsGateway: "https://ipfs.kleros.io/ipfs/"
+  ipfsGateway: "https://ipfs.kleros.io/ipfs/",
+  publishCallback: e => console.error("no publish callback"),
+  submitEvidenceCallback: e => console.error("no submit evidence callback")
 };
 
 export default EvidenceTimeline;
