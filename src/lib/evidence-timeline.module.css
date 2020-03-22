@@ -8,6 +8,7 @@
 
 button {
   padding: 0.375rem 0.75rem;
+  border: 1px solid transparent;
   border-radius: 3px;
 }
 
@@ -30,6 +31,10 @@ hr {
   margin-top: 1rem;
 }
 
+.evidenceTimeline * {
+  font-family: Roboto, sans-serif;
+}
+
 .evidence-button {
   display: block;
   margin: auto;
@@ -37,7 +42,7 @@ hr {
   color: white;
   padding: 0.5rem 1.5rem;
   border-radius: 3px;
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   font-size: 1rem;
   border-style: hidden;
 }
@@ -308,11 +313,10 @@ div > div > .divider {
   /* This way it could be display flex or grid or whatever also. */
   display: grid;
   position: fixed;
-  top: calc(50vh - 240px);
+  top: calc(50vh - 250px);
   left: 10vw;
   /* Probably need media queries here */
   width: 80vw;
-  height: 480px;
   z-index: 100;
 
   /* Use this for centering if unknown width/height */

@@ -13,11 +13,6 @@ class EvidenceTimeline extends React.Component {
 
     var root = document.documentElement;
 
-    document.addEventListener("resize", () => {
-      root.style.setProperty("--screen-x", window.screenX);
-      root.style.setProperty("--screen-y", window.screenY);
-    });
-
     this.state = {
       modalExtraClass: "closed",
       evidenceDescription: "",
@@ -36,6 +31,13 @@ class EvidenceTimeline extends React.Component {
   handleModalOpenClose = e => {
     const id = e.target.id;
     this.setState({ modalExtraClass: id == "evidence-button" ? "" : "closed" });
+  };
+
+  handleControlChange = async event => {
+    const name = event.target.name;
+    const value = event.target.value;
+    console.log([name, value]);
+    await this.setState({ [name]: value });
   };
 
   handleSubmitEvidenceButtonClick = async event => {
@@ -67,7 +69,8 @@ class EvidenceTimeline extends React.Component {
     } catch (err) {
       console.log("err");
       await this.setState({
-        awaitingConfirmation: false
+        awaitingConfirmation: false,
+        modalExtraClass: "closed"
       });
     }
   };
@@ -224,7 +227,7 @@ class EvidenceTimeline extends React.Component {
     } = this.state;
     console.log(this.props);
     return (
-      <div id="evidence-timeline">
+      <div id="evidence-timeline" className={styles.evidenceTimeline}>
         <input
           id="collapsible"
           className={styles.toggle}
@@ -391,16 +394,23 @@ class EvidenceTimeline extends React.Component {
               <div className={styles["modal-guts"]}>
                 <div className={styles.evidenceTitle}>
                   <label htmlFor="evidence-title">Evidence Title</label>
-                  <input id="evidence-title" type="text"></input>
+                  <input
+                    name="evidenceTitle"
+                    id="evidence-title"
+                    type="text"
+                    onChange={this.handleControlChange}
+                  ></input>
                 </div>
                 <div className={styles.evidenceDescription}>
                   <label htmlFor="evidence-description">
                     Evidence Description
                   </label>
                   <textarea
+                    name="evidenceDescription"
                     id="evidence-description"
                     type="textarea"
                     rows="3"
+                    onChange={this.handleControlChange}
                   ></textarea>
                 </div>
                 <div className={styles.dropzoneDiv}>
@@ -427,18 +437,31 @@ class EvidenceTimeline extends React.Component {
                 {this.props.metaevidence && (
                   <div className={styles.evidenceSide}>
                     <div className={styles.discussion}>
-                      <input type="radio" name="side" defaultChecked />
+                      <input
+                        type="radio"
+                        name="support"
+                        onChange={this.handleControlChange}
+                        defaultChecked
+                      />
                       <label>Discussion</label>
                     </div>
                     <div className={styles.sideZero}>
-                      <input type="radio" name="side" />
+                      <input
+                        type="radio"
+                        name="support"
+                        onChange={this.handleControlChange}
+                      />
                       <label>{`I'm supporting "${
                         this.props.metaevidence.metaEvidenceJSON.rulingOptions
                           .titles[0]
                       }"`}</label>
                     </div>
                     <div className={styles.sideOne}>
-                      <input type="radio" name="side" />
+                      <input
+                        type="radio"
+                        name="support"
+                        onChange={this.handleControlChange}
+                      />
                       <label>{`I'm supporting "${
                         this.props.metaevidence.metaEvidenceJSON.rulingOptions
                           .titles[1]
@@ -451,7 +474,8 @@ class EvidenceTimeline extends React.Component {
                   className={styles["submit-button"]}
                   onClick={this.handleSubmitEvidenceButtonClick}
                 >
-                  Submit
+                  {(awaitingConfirmation && "Awaiting Confirmation") ||
+                    "Submit Evidence"}
                 </button>
               </div>
             </div>
