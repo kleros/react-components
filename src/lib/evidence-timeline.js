@@ -262,7 +262,7 @@ class EvidenceTimeline extends React.Component {
         </label>
         <div className={styles["collapsible-content"]}>
           <div className={styles["content-inner"]}>
-            {(disputePeriod >= 0 || disputePeriod < 4) && (
+            {disputePeriod >= 0 && disputePeriod < 4 && (
               <>
                 <button
                   type="button"
