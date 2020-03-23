@@ -77,6 +77,7 @@ class EvidenceTimeline extends React.Component {
   };
 
   handleDrop = async acceptedFiles => {
+    await this.setState({ fileInput: null });
     var reader = new FileReader();
     reader.readAsArrayBuffer(acceptedFiles[0]);
     await reader.addEventListener("loadend", async () => {
