@@ -262,21 +262,20 @@ class EvidenceTimeline extends React.Component {
         </label>
         <div className={styles["collapsible-content"]}>
           <div className={styles["content-inner"]}>
-            {disputePeriod >= 0 ||
-              (disputePeriod < 4 && (
-                <>
-                  <button
-                    type="button"
-                    id="evidence-button"
-                    className={styles["evidence-button"]}
-                    onClick={this.handleModalOpenClose}
-                  >
-                    Submit Evidence
-                  </button>
+            {(disputePeriod >= 0 || disputePeriod < 4) && (
+              <>
+                <button
+                  type="button"
+                  id="evidence-button"
+                  className={styles["evidence-button"]}
+                  onClick={this.handleModalOpenClose}
+                >
+                  Submit Evidence
+                </button>
 
-                  <hr />
-                </>
-              ))}
+                <hr />
+              </>
+            )}
             <div className={styles["event"]}>
               {(metaevidence &&
                 (ruling && (

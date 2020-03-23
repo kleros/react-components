@@ -81,7 +81,7 @@ class App extends React.Component {
           ruling={this.state.ruling}
           currentRuling={this.state.currentRuling}
           dispute={null}
-          disputePeriod={40}
+          disputePeriod={2}
         />
         <br />
         <Footer
