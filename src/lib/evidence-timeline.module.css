@@ -430,12 +430,12 @@ div > div > .divider {
 
 .evidenceSide {
   display: block;
-  align-items: baseline;
 }
 
 .evidenceSide > div {
   display: inline-flex;
   padding-right: 1rem;
+  align-items: baseline;
 }
 
 input[type="radio"] {
