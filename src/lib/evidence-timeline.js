@@ -453,34 +453,37 @@ class EvidenceTimeline extends React.Component {
                   <div className={styles.evidenceSide}>
                     <div className={styles.discussion}>
                       <input
+                        id="radio-0"
                         value={0}
                         type="radio"
                         name="support"
                         onChange={this.handleControlChange}
                         defaultChecked
                       />
-                      <label>Discussion</label>
+                      <label htmlFor="radio-0">Discussion</label>
                     </div>
                     <div className={styles.sideZero}>
                       <input
+                        id="radio-1"
                         value={1}
                         type="radio"
                         name="support"
                         onChange={this.handleControlChange}
                       />
-                      <label>{`I'm supporting "${
+                      <label htmlFor="radio-1">{`I'm supporting "${
                         this.props.metaevidence.metaEvidenceJSON.rulingOptions
                           .titles[0]
                       }"`}</label>
                     </div>
                     <div className={styles.sideOne}>
                       <input
+                        id="radio-2"
                         value={2}
                         type="radio"
                         name="support"
                         onChange={this.handleControlChange}
                       />
-                      <label>{`I'm supporting "${
+                      <label htmlFor="radio-2">{`I'm supporting "${
                         this.props.metaevidence.metaEvidenceJSON.rulingOptions
                           .titles[1]
                       }"`}</label>
