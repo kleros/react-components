@@ -19,7 +19,8 @@ class EvidenceTimeline extends React.Component {
       evidenceTitle: "",
       fileInput: "",
       awaitingConfirmation: false,
-      support: 0
+      support: 0,
+      uploadingToIPFS: false
     };
   }
   truncateAddress = address =>
@@ -76,13 +77,12 @@ class EvidenceTimeline extends React.Component {
   };
 
   handleDrop = async acceptedFiles => {
-    await this.setState({ fileInput: "Loading..." });
     var reader = new FileReader();
     reader.readAsArrayBuffer(acceptedFiles[0]);
     await reader.addEventListener("loadend", async () => {
       const buffer = Buffer.from(reader.result);
 
-      await this.setState({ fileInput: "Publishing to IPFS..." });
+      await this.setState({ uploadingToIPFS: true });
 
       const result = await this.props.publishCallback(
         acceptedFiles[0].name,
@@ -227,7 +227,8 @@ class EvidenceTimeline extends React.Component {
       evidenceDescription,
       evidenceTitle,
       fileInput,
-      awaitingConfirmation
+      awaitingConfirmation,
+      uploadingToIPFS
     } = this.state;
     console.log(this.props);
     console.log(this.state);
@@ -434,6 +435,7 @@ class EvidenceTimeline extends React.Component {
                           <input {...getInputProps()} />
                           <p>
                             {(fileInput && fileInput.path) ||
+                              (uploadingToIPFS && "Uploading to IPFS...") ||
                               "Drag 'n' drop some files here, or click to select files."}
                           </p>
                         </div>
