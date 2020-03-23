@@ -76,13 +76,13 @@ class EvidenceTimeline extends React.Component {
   };
 
   handleDrop = async acceptedFiles => {
-    console.log(acceptedFiles);
-    this.setState({ fileInput: acceptedFiles[0] });
-
+    await this.setState({ fileInput: "Loading..." });
     var reader = new FileReader();
     reader.readAsArrayBuffer(acceptedFiles[0]);
-    reader.addEventListener("loadend", async () => {
+    await reader.addEventListener("loadend", async () => {
       const buffer = Buffer.from(reader.result);
+
+      await this.setState({ fileInput: "Publishing to IPFS..." });
 
       const result = await this.props.publishCallback(
         acceptedFiles[0].name,
@@ -92,8 +92,12 @@ class EvidenceTimeline extends React.Component {
       console.log(result);
       if (result)
         await this.setState({
-          evidenceDocument: `/ipfs/${result[1].hash}${result[0].path}`
+          evidenceDocument: `/ipfs/${result[1].hash}${result[0].path}`,
+          fileInput: acceptedFiles[0]
         });
+      else {
+        await this.setState({ fileInput: null });
+      }
     });
   };
 
@@ -505,7 +509,11 @@ EvidenceTimeline.propTypes = {
 
 EvidenceTimeline.defaultProps = {
   ipfsGateway: "https://ipfs.kleros.io",
-  publishCallback: e => console.error(e),
+  publishCallback: async e => {
+    console.error(e);
+    await new Promise(r => setTimeout(r, 4000));
+    return [{ hash: "" }, { path: "" }];
+  },
   submitEvidenceCallback: e => console.error(e)
 };
 
