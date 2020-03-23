@@ -226,7 +226,8 @@ class EvidenceTimeline extends React.Component {
       evidences,
       currentRuling,
       ruling,
-      dispute
+      dispute,
+      disputePeriod
     } = this.props;
 
     const {
@@ -261,16 +262,21 @@ class EvidenceTimeline extends React.Component {
         </label>
         <div className={styles["collapsible-content"]}>
           <div className={styles["content-inner"]}>
-            <button
-              type="button"
-              id="evidence-button"
-              className={styles["evidence-button"]}
-              onClick={this.handleModalOpenClose}
-            >
-              Submit Evidence
-            </button>
+            {disputePeriod >= 0 ||
+              (disputePeriod < 4 && (
+                <>
+                  <button
+                    type="button"
+                    id="evidence-button"
+                    className={styles["evidence-button"]}
+                    onClick={this.handleModalOpenClose}
+                  >
+                    Submit Evidence
+                  </button>
 
-            <hr />
+                  <hr />
+                </>
+              ))}
             <div className={styles["event"]}>
               {(metaevidence &&
                 (ruling && (
@@ -497,7 +503,7 @@ class EvidenceTimeline extends React.Component {
                   disabled={awaitingConfirmation}
                 >
                   {(awaitingConfirmation && "Awaiting Confirmation") ||
-                    "Submit Evidence"}
+                    "Submit"}
                 </button>
               </div>
             </div>
@@ -509,6 +515,7 @@ class EvidenceTimeline extends React.Component {
 }
 
 EvidenceTimeline.propTypes = {
+  disputePeriod: PropTypes.number.isRequired,
   ipfsGateway: PropTypes.string.isRequired,
   metaevidence: PropTypes.object,
   evidences: PropTypes.array,
@@ -526,7 +533,8 @@ EvidenceTimeline.defaultProps = {
     await new Promise(r => setTimeout(r, 4000));
     return [{ hash: "" }, { path: "" }];
   },
-  submitEvidenceCallback: e => console.error(e)
+  submitEvidenceCallback: e => console.error(e),
+  disputePeriod: 4
 };
 
 export default EvidenceTimeline;
