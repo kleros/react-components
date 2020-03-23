@@ -92,7 +92,7 @@ class EvidenceTimeline extends React.Component {
       console.log(result);
       if (result)
         await this.setState({
-          evidenceDocument: `${result[1].hash}${result[0].path}`
+          evidenceDocument: `/ipfs/${result[1].hash}${result[0].path}`
         });
     });
   };
@@ -226,6 +226,7 @@ class EvidenceTimeline extends React.Component {
       awaitingConfirmation
     } = this.state;
     console.log(this.props);
+    console.log(this.state);
     return (
       <div id="evidence-timeline" className={styles.evidenceTimeline}>
         <input
@@ -399,6 +400,7 @@ class EvidenceTimeline extends React.Component {
                     id="evidence-title"
                     type="text"
                     onChange={this.handleControlChange}
+                    value={evidenceTitle}
                   ></input>
                 </div>
                 <div className={styles.evidenceDescription}>
@@ -411,6 +413,7 @@ class EvidenceTimeline extends React.Component {
                     type="textarea"
                     rows="3"
                     onChange={this.handleControlChange}
+                    value={evidenceDescription}
                   ></textarea>
                 </div>
                 <div className={styles.dropzoneDiv}>
@@ -438,6 +441,7 @@ class EvidenceTimeline extends React.Component {
                   <div className={styles.evidenceSide}>
                     <div className={styles.discussion}>
                       <input
+                        value={0}
                         type="radio"
                         name="support"
                         onChange={this.handleControlChange}
@@ -447,6 +451,7 @@ class EvidenceTimeline extends React.Component {
                     </div>
                     <div className={styles.sideZero}>
                       <input
+                        value={1}
                         type="radio"
                         name="support"
                         onChange={this.handleControlChange}
@@ -458,6 +463,7 @@ class EvidenceTimeline extends React.Component {
                     </div>
                     <div className={styles.sideOne}>
                       <input
+                        value={2}
                         type="radio"
                         name="support"
                         onChange={this.handleControlChange}
@@ -498,9 +504,9 @@ EvidenceTimeline.propTypes = {
 };
 
 EvidenceTimeline.defaultProps = {
-  ipfsGateway: "https://ipfs.kleros.io/ipfs/",
-  publishCallback: e => console.error("no publish callback"),
-  submitEvidenceCallback: e => console.error("no submit evidence callback")
+  ipfsGateway: "https://ipfs.kleros.io",
+  publishCallback: e => console.error(e),
+  submitEvidenceCallback: e => console.error(e)
 };
 
 export default EvidenceTimeline;
