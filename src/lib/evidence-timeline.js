@@ -97,7 +97,11 @@ class EvidenceTimeline extends React.Component {
           fileInput: acceptedFiles[0]
         });
       else {
-        await this.setState({ fileInput: null });
+        await this.setState({
+          fileInput: null,
+          uploadingToIPFS: false,
+          modalExtraClass: "closed"
+        });
       }
     });
   };
