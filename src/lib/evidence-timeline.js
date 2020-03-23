@@ -71,7 +71,8 @@ class EvidenceTimeline extends React.Component {
       console.log("err");
       await this.setState({
         awaitingConfirmation: false,
-        modalExtraClass: "closed"
+        modalExtraClass: "closed",
+        uploadingToIPFS: false
       });
     }
   };
@@ -94,13 +95,13 @@ class EvidenceTimeline extends React.Component {
       if (result)
         await this.setState({
           evidenceDocument: `/ipfs/${result[1].hash}${result[0].path}`,
-          fileInput: acceptedFiles[0]
+          fileInput: acceptedFiles[0],
+          uploadingToIPFS: false
         });
       else {
         await this.setState({
           fileInput: null,
-          uploadingToIPFS: false,
-          modalExtraClass: "closed"
+          uploadingToIPFS: false
         });
       }
     });
@@ -490,6 +491,7 @@ class EvidenceTimeline extends React.Component {
                   type="button"
                   className={styles["submit-button"]}
                   onClick={this.handleSubmitEvidenceButtonClick}
+                  disabled={awaitingConfirmation}
                 >
                   {(awaitingConfirmation && "Awaiting Confirmation") ||
                     "Submit Evidence"}
