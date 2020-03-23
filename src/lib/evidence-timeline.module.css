@@ -430,6 +430,7 @@ div > div > .divider {
 
 .evidenceSide {
   display: block;
+  align-items: baseline;
 }
 
 .evidenceSide > div {
