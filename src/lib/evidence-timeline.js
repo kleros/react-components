@@ -77,6 +77,36 @@ class EvidenceTimeline extends React.Component {
     }
   };
 
+  eventPhrasing = (
+    metaevidence,
+    numberOfVotesCast,
+    currentRulingOnArbitrator,
+    ruling,
+    disputePeriodCode
+  ) => {
+    console.log(disputePeriodCode);
+    const DaysEnum = Object.freeze({
+      NO_VOTES_CAST: 0,
+      JUROR_DECISION: 1,
+      WON_BY_DEFAULT: 2,
+      FETCHING: 3
+    });
+    if (!ruling || !metaevidence) return "Fetching...";
+    else if (numberOfVotesCast == 0) return "No votes has been cast yet.";
+    else if (disputePeriodCode == 4) {
+      if (currentRulingOnArbitrator == ruling.ruling)
+        return `Jurors ruled: ${this.getRulingTitle(
+          ruling.ruling,
+          metaevidence.metaEvidenceJSON.rulingOptions
+        )} `;
+      else
+        return `Won by default: ${this.getRulingTitle(
+          ruling.ruling,
+          metaevidence.metaEvidenceJSON.rulingOptions
+        )} `;
+    } else return "Fetching...";
+  };
+
   handleDrop = async acceptedFiles => {
     await this.setState({ fileInput: null });
     var reader = new FileReader();
@@ -227,7 +257,8 @@ class EvidenceTimeline extends React.Component {
       currentRuling,
       ruling,
       dispute,
-      disputePeriod
+      disputePeriod,
+      numberOfVotesCast
     } = this.props;
 
     const {
@@ -277,25 +308,13 @@ class EvidenceTimeline extends React.Component {
               </>
             )}
             <div className={styles["event"]}>
-              {(metaevidence &&
-                (ruling && (
-                  <>
-                    <p>
-                      {`Jurors ruled: ${this.getRulingTitle(
-                        ruling.ruling,
-                        metaevidence.metaEvidenceJSON.rulingOptions
-                      )}  `}
-                    </p>
-                    <small>{new Date(ruling.ruledAt * 1000).toString()}</small>
-                  </>
-                ))) ||
-                (metaevidence &&
-                  typeof currentRuling != undefined &&
-                  `Current ruling: ${this.getRulingTitle(
-                    currentRuling,
-                    metaevidence.metaEvidenceJSON.rulingOptions
-                  )}`) ||
-                "Fetching..."}
+              {this.eventPhrasing(
+                metaevidence,
+                numberOfVotesCast,
+                currentRuling,
+                ruling,
+                disputePeriod
+              )}
             </div>
             {evidences
               .sort((a, b) => {
@@ -514,6 +533,8 @@ class EvidenceTimeline extends React.Component {
 }
 
 EvidenceTimeline.propTypes = {
+  numberOfVotesCast: PropTypes.number.isRequired,
+  dispute: PropTypes.object, // Dispute Event
   disputePeriod: PropTypes.number.isRequired,
   ipfsGateway: PropTypes.string.isRequired,
   metaevidence: PropTypes.object,

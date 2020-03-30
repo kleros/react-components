@@ -78,10 +78,11 @@ class App extends React.Component {
           key={0}
           metaevidence={this.state.metaevidence}
           evidences={this.state.evidences}
-          ruling={this.state.ruling}
+          ruling={{ ruling: 0 }}
           currentRuling={this.state.currentRuling}
           dispute={null}
-          disputePeriod={2}
+          disputePeriod={4}
+          numberOfVotesCast={0}
         />
         <br />
         <Footer
