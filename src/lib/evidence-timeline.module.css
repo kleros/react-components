@@ -82,12 +82,12 @@ input[type="checkbox"] {
   content: " ";
   display: inline-block;
 
-  border-top: 5px solid transparent;
-  border-bottom: 5px solid transparent;
-  border-left: 5px solid currentColor;
+  border-top: 0.5rem solid transparent;
+  border-bottom: 0.5rem solid transparent;
+  border-left: 0.5rem solid currentColor;
   vertical-align: middle;
-  transform: translateY(-2px);
-  margin-right: 0.7rem;
+  transform: translateY(-0.1rem);
+  margin-right: 1rem;
   transition: transform 0.2s ease-out;
 }
 
