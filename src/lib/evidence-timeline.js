@@ -91,9 +91,9 @@ class EvidenceTimeline extends React.Component {
       WON_BY_DEFAULT: 2,
       FETCHING: 3
     });
-    if (!ruling || !metaevidence) return "Fetching...";
+    if (!metaevidence) return "Fetching...";
     else if (numberOfVotesCast == 0) return "No votes has been cast yet.";
-    else if (disputePeriodCode == 4) {
+    else if (ruling && disputePeriodCode == 4) {
       if (currentRulingOnArbitrator == ruling.ruling)
         return `Jurors ruled: ${this.getRulingTitle(
           ruling.ruling,
