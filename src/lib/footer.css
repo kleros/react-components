@@ -15,6 +15,11 @@
   text-decoration: none;
 }
 
+.g-kleros_footer__anchor:hover {
+  color: white;
+  text-decoration: none;
+}
+
 .g-kleros_footer__icon {
   height: 1rem;
   width: auto;
