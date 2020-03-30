@@ -104,7 +104,11 @@ class EvidenceTimeline extends React.Component {
           ruling.ruling,
           metaevidence.metaEvidenceJSON.rulingOptions
         )} `;
-    } else return "Fetching...";
+    } else
+      return `Current ruling: ${this.getRulingTitle(
+        currentRulingOnArbitrator,
+        metaevidence.metaEvidenceJSON.rulingOptions
+      )} `;
   };
 
   handleDrop = async acceptedFiles => {

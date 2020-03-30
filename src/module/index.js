@@ -81,8 +81,8 @@ class App extends React.Component {
           ruling={{ ruling: 0 }}
           currentRuling={this.state.currentRuling}
           dispute={null}
-          disputePeriod={4}
-          numberOfVotesCast={0}
+          disputePeriod={2}
+          numberOfVotesCast={2}
         />
         <br />
         <Footer
