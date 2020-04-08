@@ -249,8 +249,8 @@ class EvidenceTimeline extends React.Component {
   };
 
   getRulingTitle = (rulingCode, rulingOptions) => {
-    if (rulingCode) return rulingOptions.titles[rulingCode - 1];
-    else return "Refused to Rule";
+    if (rulingCode != 0) return rulingOptions.titles[parseInt(rulingCode) - 1];
+    else return "Tied";
   };
 
   render() {
