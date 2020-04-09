@@ -4,9 +4,9 @@ import { EvidenceTimeline } from "../lib/index";
 import Archon from "@kleros/archon";
 
 const archon = new Archon(window.ethereum, "https://ipfs.kleros.io");
-const KLEROS_MAIN = "0x988b3a538b618c7a603e1c11ab82cd16dbe28069";
-const DISPUTE_ID = 132;
-const ARBITRATED = "0xebcf3bca271b26ae4b162ba560e243055af0e679";
+const KLEROS = "0x60B2AbfDfaD9c0873242f59f2A8c32A3Cc682f80";
+const DISPUTE_ID = 609;
+const ARBITRATED = "0x122b6601deC837DBE0c1ffb25A1089770EFE53a2";
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -17,18 +17,18 @@ class App extends React.Component {
   }
 
   getDisputeCreation = async () =>
-    archon.arbitrable.getDispute(ARBITRATED, KLEROS_MAIN, DISPUTE_ID);
+    archon.arbitrable.getDispute(ARBITRATED, KLEROS, DISPUTE_ID);
 
   getCurrentRuling = async () =>
-    archon.arbitrator.getCurrentRuling(KLEROS_MAIN, DISPUTE_ID);
+    archon.arbitrator.getCurrentRuling(KLEROS, DISPUTE_ID);
 
   getRuling = async () =>
-    archon.arbitrable.getRuling(ARBITRATED, KLEROS_MAIN, DISPUTE_ID);
+    archon.arbitrable.getRuling(ARBITRATED, KLEROS, DISPUTE_ID);
 
   getMetaEvidence = async () => {
     const disputeLog = await archon.arbitrable.getDispute(
       ARBITRATED, // arbitrable contract address
-      KLEROS_MAIN, // arbitrator contract address
+      KLEROS, // arbitrator contract address
       DISPUTE_ID // dispute unique identifier
     );
 
@@ -43,13 +43,13 @@ class App extends React.Component {
   getEvidence = async () => {
     const disputeLog = await archon.arbitrable.getDispute(
       ARBITRATED, // arbitrable contract address
-      KLEROS_MAIN, // arbitrator contract address
+      KLEROS, // arbitrator contract address
       DISPUTE_ID // dispute unique identifier
     );
 
     const evidence = await archon.arbitrable.getEvidence(
       ARBITRATED,
-      KLEROS_MAIN,
+      KLEROS,
       disputeLog.evidenceGroupID
     );
     return evidence;
@@ -58,14 +58,14 @@ class App extends React.Component {
   componentDidMount = async () => {
     const metaevidence = await this.getMetaEvidence();
     const evidences = await this.getEvidence();
-    const ruling = await this.getRuling();
+    //const ruling = await this.getRuling();
     const currentRuling = await this.getCurrentRuling();
     const disputeEvent = await this.getDisputeCreation();
 
     this.setState({
       metaevidence,
       evidences,
-      ruling,
+      //ruling,
       currentRuling,
       disputeEvent
     });

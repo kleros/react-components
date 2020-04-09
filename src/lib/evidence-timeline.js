@@ -62,13 +62,14 @@ class EvidenceTimeline extends React.Component {
 
       await this.setState({
         awaitingConfirmation: false,
+        modalExtraClass: "closed",
         evidenceTitle: "",
         evidenceDescription: "",
         fileInput: "",
         support: 0
       });
     } catch (err) {
-      console.log("err");
+      console.log(err);
       await this.setState({
         awaitingConfirmation: false,
         modalExtraClass: "closed",
@@ -557,7 +558,9 @@ EvidenceTimeline.defaultProps = {
     await new Promise(r => setTimeout(r, 4000));
     return [{ hash: "" }, { path: "" }];
   },
-  submitEvidenceCallback: e => console.error(e),
+  submitEvidenceCallback: async e => {
+    await new Promise(r => setTimeout(r, 4000));
+  },
   disputePeriod: 4
 };
 
