@@ -399,6 +399,8 @@ class EvidenceTimeline extends React.Component {
                       </div>
                       <a
                         href={`${ipfsGateway}${evidence.evidenceJSON.fileURI}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
                       >
                         {this.getAttachmentIcon(evidence.evidenceJSON.fileURI)}
                       </a>
