@@ -263,7 +263,8 @@ class EvidenceTimeline extends React.Component {
       ruling,
       dispute,
       disputePeriod,
-      numberOfVotesCast
+      numberOfVotesCast,
+      evidenceSubmissionEnabled
     } = this.props;
 
     const {
@@ -298,20 +299,22 @@ class EvidenceTimeline extends React.Component {
         </label>
         <div className={styles["collapsible-content"]}>
           <div className={styles["content-inner"]}>
-            {disputePeriod >= 0 && disputePeriod < 4 && (
-              <>
-                <button
-                  type="button"
-                  id="evidence-button"
-                  className={styles["evidence-button"]}
-                  onClick={this.handleModalOpenClose}
-                >
-                  Submit Evidence
-                </button>
+            {evidenceSubmissionEnabled &&
+              parseInt(disputePeriod) >= 0 &&
+              parseInt(disputePeriod) < 4 && (
+                <>
+                  <button
+                    type="button"
+                    id="evidence-button"
+                    className={styles["evidence-button"]}
+                    onClick={this.handleModalOpenClose}
+                  >
+                    Submit Evidence
+                  </button>
 
-                <hr />
-              </>
-            )}
+                  <hr />
+                </>
+              )}
             <div className={styles["event"]}>
               {this.eventPhrasing(
                 metaevidence,
@@ -550,7 +553,8 @@ EvidenceTimeline.propTypes = {
   currentRuling: PropTypes.number,
   evidenceButtonHandler: PropTypes.func,
   publishCallback: PropTypes.func,
-  submitEvidenceCallback: PropTypes.func
+  submitEvidenceCallback: PropTypes.func,
+  evidenceSubmissionEnabled: PropTypes.bool
 };
 
 EvidenceTimeline.defaultProps = {
@@ -563,7 +567,8 @@ EvidenceTimeline.defaultProps = {
   submitEvidenceCallback: async e => {
     await new Promise(r => setTimeout(r, 4000));
   },
-  disputePeriod: 4
+  disputePeriod: 4,
+  evidenceSubmissionEnabled: true
 };
 
 export default EvidenceTimeline;

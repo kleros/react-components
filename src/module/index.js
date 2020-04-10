@@ -5,7 +5,7 @@ import Archon from "@kleros/archon";
 
 const archon = new Archon(window.ethereum, "https://ipfs.kleros.io");
 const KLEROS = "0x60B2AbfDfaD9c0873242f59f2A8c32A3Cc682f80";
-const DISPUTE_ID = 609;
+const DISPUTE_ID = 608;
 const ARBITRATED = "0x122b6601deC837DBE0c1ffb25A1089770EFE53a2";
 class App extends React.Component {
   constructor(props) {
