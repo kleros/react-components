@@ -609,7 +609,8 @@ EvidenceTimeline.defaultProps = {
     await new Promise(r => setTimeout(r, 4000));
   },
   disputePeriod: 4,
-  evidenceSubmissionEnabled: true
+  evidenceSubmissionEnabled: true,
+  appealDecisions: []
 };
 
 export default EvidenceTimeline;

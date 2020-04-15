@@ -107,15 +107,7 @@ class App extends React.Component {
           dispute={null}
           disputePeriod={2}
           numberOfVotesCast={2}
-          appealDecisions={[
-            {
-              appealedAt: 1586948042,
-              arbitrableContract: "0x91697c78d48e9c83b71727ddd41ccdc95bb2f012",
-              blockNumber: 6459276,
-              transactionHash:
-                "0x340fdc6e32ef24eb14f9ccbd2ec614a8d0c7121e8d53f574529008f468481990"
-            }
-          ]}
+          appealDecisions={[]}
         />
         <br />
         <Footer
