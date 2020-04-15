@@ -264,7 +264,8 @@ class EvidenceTimeline extends React.Component {
       dispute,
       disputePeriod,
       numberOfVotesCast,
-      evidenceSubmissionEnabled
+      evidenceSubmissionEnabled,
+      appealDecisions
     } = this.props;
 
     const {
@@ -325,92 +326,131 @@ class EvidenceTimeline extends React.Component {
               )}
             </div>
             {evidences
+              .concat(appealDecisions)
               .sort((a, b) => {
-                if (a.submittedAt > b.submittedAt) return -1;
-                else if (a.submittedAt < b.submittedAt) return 1;
+                if (
+                  a.submittedAt > b.submittedAt ||
+                  a.appealedAt > b.submittedAt ||
+                  a.appealedAt > b.appealedAt ||
+                  a.submittedAt > b.appealedAt
+                )
+                  return -1;
+                else if (
+                  a.submittedAt < b.submittedAt ||
+                  a.appealedAt < b.submittedAt ||
+                  a.appealedAt < b.appealedAt ||
+                  a.submittedAt < b.appealedAt
+                )
+                  return 1;
 
                 return 0;
               })
-              .map((evidence, index) => (
-                <React.Fragment key={index}>
-                  <div className={styles["divider"]}></div>
-                  <div className={styles.evidence}>
-                    <div className={styles["header"]}>
-                      <h1>
-                        {evidence.evidenceJSON.title ||
-                          evidence.evidenceJSON.name}
-                      </h1>
-                      <a
-                        href={`https://etherscan.io/tx/${evidence.transactionHash}`}
-                      >
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="293.775"
-                          height="293.667"
-                          viewBox="0 0 293.775 293.667"
-                        >
-                          <g
-                            id="etherscan-logo-circle"
-                            transform="translate(-219.378 -213.334)"
-                          >
-                            <path
-                              id="Path_1"
-                              data-name="Path 1"
-                              d="M280.433,353.152A12.45,12.45,0,0,1,292.941,340.7l20.737.068a12.467,12.467,0,0,1,12.467,12.467v78.414c2.336-.692,5.332-1.43,8.614-2.2a10.389,10.389,0,0,0,8.009-10.11V322.073a12.469,12.469,0,0,1,12.467-12.47h20.779a12.47,12.47,0,0,1,12.467,12.47v90.276s5.2-2.106,10.269-4.245a10.408,10.408,0,0,0,6.353-9.577V290.9a12.466,12.466,0,0,1,12.465-12.467h20.779A12.468,12.468,0,0,1,450.815,290.9v88.625c18.014-13.055,36.271-28.758,50.759-47.639a20.926,20.926,0,0,0,3.185-19.537,146.6,146.6,0,0,0-136.644-99.006c-81.439-1.094-148.744,65.385-148.736,146.834a146.371,146.371,0,0,0,19.5,73.45,18.56,18.56,0,0,0,17.707,9.173c3.931-.346,8.825-.835,14.643-1.518a10.383,10.383,0,0,0,9.209-10.306V353.152"
-                              transform="translate(0 0)"
-                              fill="#4d00b4"
-                            />
-                            <path
-                              id="Path_2"
-                              data-name="Path 2"
-                              d="M244.417,398.641A146.808,146.808,0,0,0,477.589,279.9c0-3.381-.157-6.724-.383-10.049-53.642,80-152.686,117.405-232.79,128.793"
-                              transform="translate(35.564 80.269)"
-                              fill="#4d00b4"
-                            />
-                          </g>
-                        </svg>
-                      </a>
-                    </div>
-                    <p>{evidence.evidenceJSON.description}</p>
-                    <div
-                      className={
-                        styles.footer +
-                        " " +
-                        styles[
-                          `${evidence.evidenceJSON.evidenceSide != undefined}`
-                        ]
-                      }
-                    >
-                      {evidence.evidenceJSON.evidenceSide != undefined && (
-                        <div className={styles["evidence-side"]}>
-                          {this.getSupportingSideIcon(
-                            evidence.evidenceJSON.evidenceSide
-                          )}
-                        </div>
-                      )}
-                      <div className={styles["temp"]}>
-                        <span className={styles["sender"]}>
-                          Submitted by:{" "}
-                          {this.truncateAddress(evidence.submittedBy)}
-                        </span>
+              .map((evidenceOrEvent, index) => {
+                if (evidenceOrEvent.appealedAt)
+                  return (
+                    <>
+                      <div className={styles["divider"]}></div>
 
-                        <br />
-                        <span className={styles["timestamp"]}>
-                          Submitted at:{" "}
-                          {new Date(evidence.submittedAt * 1000).toString()}
-                        </span>
+                      <div className={styles["event"]}>
+                        <p>Appealed</p>
+                        <small>
+                          {new Date(
+                            evidenceOrEvent.appealedAt * 1000
+                          ).toString()}
+                        </small>
                       </div>
-                      <a
-                        href={`${ipfsGateway}${evidence.evidenceJSON.fileURI}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {this.getAttachmentIcon(evidence.evidenceJSON.fileURI)}
-                      </a>
-                    </div>
-                  </div>
-                </React.Fragment>
-              ))}
+                    </>
+                  );
+                else
+                  return (
+                    <React.Fragment key={index}>
+                      <div className={styles["divider"]}></div>
+                      <div className={styles.evidence}>
+                        <div className={styles["header"]}>
+                          <h1>
+                            {evidenceOrEvent.evidenceJSON.title ||
+                              evidenceOrEvent.evidenceJSON.name}
+                          </h1>
+                          <a
+                            href={`https://etherscan.io/tx/${evidenceOrEvent.transactionHash}`}
+                          >
+                            <svg
+                              xmlns="http://www.w3.org/2000/svg"
+                              width="293.775"
+                              height="293.667"
+                              viewBox="0 0 293.775 293.667"
+                            >
+                              <g
+                                id="etherscan-logo-circle"
+                                transform="translate(-219.378 -213.334)"
+                              >
+                                <path
+                                  id="Path_1"
+                                  data-name="Path 1"
+                                  d="M280.433,353.152A12.45,12.45,0,0,1,292.941,340.7l20.737.068a12.467,12.467,0,0,1,12.467,12.467v78.414c2.336-.692,5.332-1.43,8.614-2.2a10.389,10.389,0,0,0,8.009-10.11V322.073a12.469,12.469,0,0,1,12.467-12.47h20.779a12.47,12.47,0,0,1,12.467,12.47v90.276s5.2-2.106,10.269-4.245a10.408,10.408,0,0,0,6.353-9.577V290.9a12.466,12.466,0,0,1,12.465-12.467h20.779A12.468,12.468,0,0,1,450.815,290.9v88.625c18.014-13.055,36.271-28.758,50.759-47.639a20.926,20.926,0,0,0,3.185-19.537,146.6,146.6,0,0,0-136.644-99.006c-81.439-1.094-148.744,65.385-148.736,146.834a146.371,146.371,0,0,0,19.5,73.45,18.56,18.56,0,0,0,17.707,9.173c3.931-.346,8.825-.835,14.643-1.518a10.383,10.383,0,0,0,9.209-10.306V353.152"
+                                  transform="translate(0 0)"
+                                  fill="#4d00b4"
+                                />
+                                <path
+                                  id="Path_2"
+                                  data-name="Path 2"
+                                  d="M244.417,398.641A146.808,146.808,0,0,0,477.589,279.9c0-3.381-.157-6.724-.383-10.049-53.642,80-152.686,117.405-232.79,128.793"
+                                  transform="translate(35.564 80.269)"
+                                  fill="#4d00b4"
+                                />
+                              </g>
+                            </svg>
+                          </a>
+                        </div>
+                        <p>{evidenceOrEvent.evidenceJSON.description}</p>
+                        <div
+                          className={
+                            styles.footer +
+                            " " +
+                            styles[
+                              `${evidenceOrEvent.evidenceJSON.evidenceSide !=
+                                undefined}`
+                            ]
+                          }
+                        >
+                          {evidenceOrEvent.evidenceJSON.evidenceSide !=
+                            undefined && (
+                            <div className={styles["evidence-side"]}>
+                              {this.getSupportingSideIcon(
+                                evidenceOrEvent.evidenceJSON.evidenceSide
+                              )}
+                            </div>
+                          )}
+                          <div className={styles["temp"]}>
+                            <span className={styles["sender"]}>
+                              Submitted by:{" "}
+                              {this.truncateAddress(
+                                evidenceOrEvent.submittedBy
+                              )}
+                            </span>
+
+                            <br />
+                            <span className={styles["timestamp"]}>
+                              Submitted at:{" "}
+                              {new Date(
+                                evidenceOrEvent.submittedAt * 1000
+                              ).toString()}
+                            </span>
+                          </div>
+                          <a
+                            href={`${ipfsGateway}${evidenceOrEvent.evidenceJSON.fileURI}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {this.getAttachmentIcon(
+                              evidenceOrEvent.evidenceJSON.fileURI
+                            )}
+                          </a>
+                        </div>
+                      </div>
+                    </React.Fragment>
+                  );
+              })}
             <div className={styles["divider"]}></div>
             <div className={styles["event"]}>
               <>
@@ -554,7 +594,8 @@ EvidenceTimeline.propTypes = {
   evidenceButtonHandler: PropTypes.func,
   publishCallback: PropTypes.func,
   submitEvidenceCallback: PropTypes.func,
-  evidenceSubmissionEnabled: PropTypes.bool
+  evidenceSubmissionEnabled: PropTypes.bool,
+  appealDecisions: PropTypes.array
 };
 
 EvidenceTimeline.defaultProps = {

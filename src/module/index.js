@@ -4,32 +4,52 @@ import { EvidenceTimeline } from "../lib/index";
 import Archon from "@kleros/archon";
 
 const archon = new Archon(window.ethereum, "https://ipfs.kleros.io");
-// const KLEROS = "0x60B2AbfDfaD9c0873242f59f2A8c32A3Cc682f80";
-const KLEROS = "0x988b3A538b618C7A603e1c11Ab82Cd16dbE28069";
-const DISPUTE_ID = 181;
-const ARBITRATED = "0x135C573503f70dc290b1d60Fe2E7f7eB114FEBd6";
+
+const KLEROS = Object.freeze({
+  1: "0x988b3a538b618c7a603e1c11ab82cd16dbe28069",
+  42: "0x60B2AbfDfaD9c0873242f59f2A8c32A3Cc682f80"
+});
+
+const DISPUTE_ID = 628;
+const ARBITRATED = "0x122b6601deC837DBE0c1ffb25A1089770EFE53a2";
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       evidences: [],
-      currentRuling: ""
+      currentRuling: "",
+      network: 42
     };
   }
 
-  getDisputeCreation = async () =>
-    archon.arbitrable.getDispute(ARBITRATED, KLEROS, DISPUTE_ID);
+  getDisputeCreation = () =>
+    archon.arbitrable.getDispute(
+      ARBITRATED,
+      KLEROS[this.state.network],
+      DISPUTE_ID
+    );
 
-  getCurrentRuling = async () =>
-    archon.arbitrator.getCurrentRuling(KLEROS, DISPUTE_ID);
+  getCurrentRuling = () =>
+    archon.arbitrator.getCurrentRuling(KLEROS[this.state.network], DISPUTE_ID);
 
-  getRuling = async () =>
-    archon.arbitrable.getRuling(ARBITRATED, KLEROS, DISPUTE_ID);
+  getRuling = () =>
+    archon.arbitrable.getRuling(
+      ARBITRATED,
+      KLEROS[this.state.network],
+      DISPUTE_ID
+    );
+
+  getAppealDecision = () =>
+    archon.arbitrator.getAppealDecision(
+      KLEROS[this.state.network],
+      DISPUTE_ID,
+      1
+    );
 
   getMetaEvidence = async () => {
     const disputeLog = await archon.arbitrable.getDispute(
       ARBITRATED, // arbitrable contract address
-      KLEROS, // arbitrator contract address
+      KLEROS[this.state.network], // arbitrator contract address
       DISPUTE_ID // dispute unique identifier
     );
 
@@ -44,13 +64,13 @@ class App extends React.Component {
   getEvidence = async () => {
     const disputeLog = await archon.arbitrable.getDispute(
       ARBITRATED, // arbitrable contract address
-      KLEROS, // arbitrator contract address
+      KLEROS[this.state.network], // arbitrator contract address
       DISPUTE_ID // dispute unique identifier
     );
 
     const evidence = await archon.arbitrable.getEvidence(
       ARBITRATED,
-      KLEROS,
+      KLEROS[this.state.network],
       disputeLog.evidenceGroupID
     );
     return evidence;
@@ -62,6 +82,7 @@ class App extends React.Component {
     //const ruling = await this.getRuling();
     const currentRuling = await this.getCurrentRuling();
     const disputeEvent = await this.getDisputeCreation();
+    // const appealDecision = await this.getAppealDecision();
 
     this.setState({
       metaevidence,
@@ -73,6 +94,8 @@ class App extends React.Component {
   };
 
   render() {
+    if (!this.state.network) return null;
+    console.log(this.state);
     return (
       <>
         <EvidenceTimeline
@@ -84,6 +107,15 @@ class App extends React.Component {
           dispute={null}
           disputePeriod={2}
           numberOfVotesCast={2}
+          appealDecisions={[
+            {
+              appealedAt: 1586948042,
+              arbitrableContract: "0x91697c78d48e9c83b71727ddd41ccdc95bb2f012",
+              blockNumber: 6459276,
+              transactionHash:
+                "0x340fdc6e32ef24eb14f9ccbd2ec614a8d0c7121e8d53f574529008f468481990"
+            }
+          ]}
         />
         <br />
         <Footer
