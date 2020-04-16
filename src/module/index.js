@@ -10,7 +10,7 @@ const KLEROS = Object.freeze({
   42: "0x60B2AbfDfaD9c0873242f59f2A8c32A3Cc682f80"
 });
 
-const DISPUTE_ID = 628;
+const DISPUTE_ID = 629;
 const ARBITRATED = "0x122b6601deC837DBE0c1ffb25A1089770EFE53a2";
 class App extends React.Component {
   constructor(props) {
@@ -82,7 +82,6 @@ class App extends React.Component {
     //const ruling = await this.getRuling();
     const currentRuling = await this.getCurrentRuling();
     const disputeEvent = await this.getDisputeCreation();
-    // const appealDecision = await this.getAppealDecision();
 
     this.setState({
       metaevidence,
@@ -107,7 +106,6 @@ class App extends React.Component {
           dispute={null}
           disputePeriod={2}
           numberOfVotesCast={2}
-          appealDecisions={[]}
         />
         <br />
         <Footer

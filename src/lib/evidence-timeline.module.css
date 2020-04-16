@@ -158,7 +158,8 @@ label {
   font-size: large;
 }
 
-.evidence p {
+.evidence p,
+.evidence pre {
   padding: 0rem 1.5rem;
   margin-top: 1rem;
   margin-bottom: 1rem;
