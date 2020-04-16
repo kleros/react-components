@@ -160,9 +160,8 @@ label {
 
 .evidence p,
 .evidence pre {
-  padding: 0rem 1.5rem;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 1.5rem;
+  overflow: auto;
 }
 
 .evidence .temp > span.sender {
