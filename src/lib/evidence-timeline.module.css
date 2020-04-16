@@ -162,6 +162,7 @@ label {
 .evidence pre {
   margin: 1rem 1.5rem;
   overflow: auto;
+  white-space: pre-wrap;
 }
 
 .evidence .temp > span.sender {
