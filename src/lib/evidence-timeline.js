@@ -348,7 +348,7 @@ class EvidenceTimeline extends React.Component {
               .map((evidenceOrEvent, index) => {
                 if (evidenceOrEvent.appealedAt)
                   return (
-                    <>
+                    <React.Fragment key={index}>
                       <div className={styles["divider"]}></div>
 
                       <div className={styles["event"]}>
@@ -359,7 +359,7 @@ class EvidenceTimeline extends React.Component {
                           ).toString()}
                         </small>
                       </div>
-                    </>
+                    </React.Fragment>
                   );
                 else
                   return (
@@ -514,10 +514,7 @@ class EvidenceTimeline extends React.Component {
                         name="support"
                         onChange={this.handleControlChange}
                       />
-                      <label htmlFor="radio-1">{`I'm supporting "${
-                        this.props.metaevidence.metaEvidenceJSON.rulingOptions
-                          .titles[0]
-                      }"`}</label>
+                      <label htmlFor="radio-1">{`I'm supporting "${this.props.metaevidence.metaEvidenceJSON.rulingOptions.titles[0]}"`}</label>
                     </div>
                     <div className={styles.sideOne}>
                       <input
@@ -527,10 +524,7 @@ class EvidenceTimeline extends React.Component {
                         name="support"
                         onChange={this.handleControlChange}
                       />
-                      <label htmlFor="radio-2">{`I'm supporting "${
-                        this.props.metaevidence.metaEvidenceJSON.rulingOptions
-                          .titles[1]
-                      }"`}</label>
+                      <label htmlFor="radio-2">{`I'm supporting "${this.props.metaevidence.metaEvidenceJSON.rulingOptions.titles[1]}"`}</label>
                     </div>
                   </div>
                 )}
