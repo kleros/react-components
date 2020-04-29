@@ -106,6 +106,7 @@ class App extends React.Component {
           dispute={null}
           disputePeriod={2}
           numberOfVotesCast={2}
+          numberOfVotes={7}
         />
         <br />
         <Footer

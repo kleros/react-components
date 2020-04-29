@@ -80,6 +80,7 @@ class EvidenceTimeline extends React.Component {
 
   eventPhrasing = (
     metaevidence,
+    numberOfVotes,
     numberOfVotesCast,
     currentRulingOnArbitrator,
     ruling,
@@ -106,7 +107,7 @@ class EvidenceTimeline extends React.Component {
           metaevidence.metaEvidenceJSON.rulingOptions
         )} `;
     } else
-      return `Current ruling: ${this.getRulingTitle(
+      return `${numberOfVotesCast} out of ${numberOfVotes} votes has been cast. \nCurrent ruling: ${this.getRulingTitle(
         currentRulingOnArbitrator,
         metaevidence.metaEvidenceJSON.rulingOptions
       )} `;
@@ -263,6 +264,7 @@ class EvidenceTimeline extends React.Component {
       ruling,
       dispute,
       disputePeriod,
+      numberOfVotes,
       numberOfVotesCast,
       evidenceSubmissionEnabled,
       appealDecisions
@@ -317,13 +319,16 @@ class EvidenceTimeline extends React.Component {
                 </>
               )}
             <div className={styles["event"]}>
-              {this.eventPhrasing(
-                metaevidence,
-                numberOfVotesCast,
-                currentRuling,
-                ruling,
-                disputePeriod
-              )}
+              <pre>
+                {this.eventPhrasing(
+                  metaevidence,
+                  numberOfVotes,
+                  numberOfVotesCast,
+                  currentRuling,
+                  ruling,
+                  disputePeriod
+                )}
+              </pre>
             </div>
             {evidences
               .concat(appealDecisions)
@@ -548,6 +553,7 @@ class EvidenceTimeline extends React.Component {
 
 EvidenceTimeline.propTypes = {
   numberOfVotesCast: PropTypes.number.isRequired,
+  numberOfVotes: PropTypes.number.isRequired,
   dispute: PropTypes.object, // Dispute Event
   disputePeriod: PropTypes.number.isRequired,
   ipfsGateway: PropTypes.string.isRequired,
