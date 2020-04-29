@@ -302,6 +302,7 @@ div > div > .divider {
 .event p,
 .event pre {
   margin: 0;
+  color: white;
 }
 
 .modal-header {
