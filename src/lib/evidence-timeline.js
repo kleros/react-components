@@ -319,7 +319,7 @@ class EvidenceTimeline extends React.Component {
                 </>
               )}
             <div className={styles["event"]}>
-              <pre>
+              <p>
                 {this.eventPhrasing(
                   metaevidence,
                   numberOfVotes,
@@ -328,7 +328,7 @@ class EvidenceTimeline extends React.Component {
                   ruling,
                   disputePeriod
                 )}
-              </pre>
+              </p>
             </div>
             {evidences
               .concat(appealDecisions)
