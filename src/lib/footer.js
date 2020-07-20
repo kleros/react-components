@@ -7,7 +7,7 @@ export const content = {
   en: { "find-out": "Find out more about Kleros", help: "I need help" },
   tr: {
     "find-out": "Kleros hakkında detaylı bilgi için",
-    help: "Yardıma ihtiyacım var"
+    help: "Yardıma ihtiyacım var",
   },
   fr: { "find-out": "En Savoir plus sur Kleros", help: "J’ai besoin d’aide" },
   pt: { "find-out": "Saiba mais sobre o Kleros", help: "Preciso de ajuda" },
@@ -15,8 +15,8 @@ export const content = {
   ru: { "find-out": "Узнайте больше о Kleros", help: "Мне нужна помощь" },
   "pt-BR": {
     "find-out": "Aprenda mais sobre Kleros",
-    help: "Preciso de ajuda"
-  }
+    help: "Preciso de ajuda",
+  },
 };
 
 const DEFAULT_LOCALE = "en";
@@ -27,6 +27,41 @@ class Footer extends React.Component {
       ? content[locale][key]
       : content[DEFAULT_LOCALE][key];
 
+  doRenderHelpLink() {
+    const { locale, renderHelpLink } = this.props;
+
+    const helpContent = this.getContent(locale, "help");
+    const helpIcon = (
+      <svg
+        className="g-kleros_footer__icon"
+        width="18"
+        height="18"
+        viewBox="0 0 18 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          className="g-kleros_footer__icon--filled"
+          d="M9 0.28125C4.18511 0.28125 0.28125 4.18651 0.28125 9C0.28125 13.8163 4.18511 17.7188 9 17.7188C13.8149 17.7188 17.7188 13.8163 17.7188 9C17.7188 4.18651 13.8149 0.28125 9 0.28125ZM9 16.0312C5.11411 16.0312 1.96875 12.8872 1.96875 9C1.96875 5.11541 5.11425 1.96875 9 1.96875C12.8844 1.96875 16.0312 5.11421 16.0312 9C16.0312 12.8858 12.8872 16.0312 9 16.0312ZM12.7703 7.05938C12.7703 9.41667 10.2242 9.45295 10.2242 10.3241V10.5469C10.2242 10.7799 10.0354 10.9688 9.80237 10.9688H8.19759C7.96461 10.9688 7.77572 10.7799 7.77572 10.5469V10.2425C7.77572 8.9858 8.72845 8.48345 9.44842 8.07978C10.0658 7.73367 10.4442 7.49827 10.4442 7.0399C10.4442 6.43359 9.67078 6.03116 9.04553 6.03116C8.23029 6.03116 7.85394 6.41707 7.32491 7.08476C7.18228 7.26476 6.92202 7.29819 6.739 7.15943L5.76081 6.4177C5.58127 6.28158 5.54105 6.02866 5.66786 5.84244C6.49849 4.62273 7.55648 3.9375 9.2037 3.9375C10.9288 3.9375 12.7703 5.28413 12.7703 7.05938ZM10.4766 12.9375C10.4766 13.7517 9.81418 14.4141 9 14.4141C8.18582 14.4141 7.52344 13.7517 7.52344 12.9375C7.52344 12.1233 8.18582 11.4609 9 11.4609C9.81418 11.4609 10.4766 12.1233 10.4766 12.9375Z"
+        />
+      </svg>
+    );
+
+    if (typeof renderHelpLink !== "function") {
+      return (
+        <a className="g-kleros_footer__anchor" href="https://t.me/kleros">
+          {helpContent} {helpIcon}
+        </a>
+      );
+    }
+
+    const node = renderHelpLink({ content: helpContent, icon: helpIcon });
+
+    return React.cloneElement(node, {
+      className: [node.props.className, 'g-kleros_footer__anchor'].filter(c => !!c).join(' '),
+    });
+  }
+
   render() {
     const {
       appName,
@@ -34,7 +69,7 @@ class Footer extends React.Component {
       repository,
       locale,
       footerElProps,
-      className
+      className,
     } = this.props;
 
     return (
@@ -79,24 +114,7 @@ class Footer extends React.Component {
             </svg>
           </a>
         </div>
-        <div className="g-kleros_footer__help">
-          <a className="g-kleros_footer__anchor" href="https://t.me/kleros">
-            {this.getContent(locale, "help")}{" "}
-            <svg
-              className="g-kleros_footer__icon"
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                className="g-kleros_footer__icon--filled"
-                d="M9 0.28125C4.18511 0.28125 0.28125 4.18651 0.28125 9C0.28125 13.8163 4.18511 17.7188 9 17.7188C13.8149 17.7188 17.7188 13.8163 17.7188 9C17.7188 4.18651 13.8149 0.28125 9 0.28125ZM9 16.0312C5.11411 16.0312 1.96875 12.8872 1.96875 9C1.96875 5.11541 5.11425 1.96875 9 1.96875C12.8844 1.96875 16.0312 5.11421 16.0312 9C16.0312 12.8858 12.8872 16.0312 9 16.0312ZM12.7703 7.05938C12.7703 9.41667 10.2242 9.45295 10.2242 10.3241V10.5469C10.2242 10.7799 10.0354 10.9688 9.80237 10.9688H8.19759C7.96461 10.9688 7.77572 10.7799 7.77572 10.5469V10.2425C7.77572 8.9858 8.72845 8.48345 9.44842 8.07978C10.0658 7.73367 10.4442 7.49827 10.4442 7.0399C10.4442 6.43359 9.67078 6.03116 9.04553 6.03116C8.23029 6.03116 7.85394 6.41707 7.32491 7.08476C7.18228 7.26476 6.92202 7.29819 6.739 7.15943L5.76081 6.4177C5.58127 6.28158 5.54105 6.02866 5.66786 5.84244C6.49849 4.62273 7.55648 3.9375 9.2037 3.9375C10.9288 3.9375 12.7703 5.28413 12.7703 7.05938ZM10.4766 12.9375C10.4766 13.7517 9.81418 14.4141 9 14.4141C8.18582 14.4141 7.52344 13.7517 7.52344 12.9375C7.52344 12.1233 8.18582 11.4609 9 11.4609C9.81418 11.4609 10.4766 12.1233 10.4766 12.9375Z"
-              />
-            </svg>
-          </a>
-        </div>
+        <div className="g-kleros_footer__help">{this.doRenderHelpLink()}</div>
         <div className="g-kleros_footer__social">
           <a
             className="g-kleros_footer__anchor"
@@ -298,18 +316,20 @@ Footer.defaultProps = {
   contractExplorerURL:
     "https://etherscan.io/address/0x988b3a538b618c7a603e1c11ab82cd16dbe28069#code",
   repository: "https://github.com/kleros",
+  renderHelpLink: null,
   locale: "en",
   footerElProps: {},
-  className: ""
+  className: "",
 };
 
 Footer.propTypes = {
   appName: PropTypes.string.isRequired,
   contractExplorerURL: PropTypes.string.isRequired,
   repository: PropTypes.string,
+  renderHelpLink: PropTypes.func,
   locale: PropTypes.oneOf(Object.keys(content)),
   footerElProps: PropTypes.object,
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Footer;
