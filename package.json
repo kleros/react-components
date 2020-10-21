@@ -1,6 +1,6 @@
 {
   "name": "@kleros/react-components",
-  "version": "4.1.0",
+  "version": "4.1.1",
   "author": "Kleros",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -45,7 +45,7 @@
     ]
   },
   "dependencies": {
-    "@kleros/archon": "^0.11.1",
+    "@kleros/archon": "^0.11.2",
     "clsx": "^1.1.0",
     "is-image": "^3.0.0",
     "is-text-path": "^2.0.0",
