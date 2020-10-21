@@ -58,7 +58,9 @@ class Footer extends React.Component {
     const node = renderHelpLink({ content: helpContent, icon: helpIcon });
 
     return React.cloneElement(node, {
-      className: [node.props.className, 'g-kleros_footer__anchor'].filter(c => !!c).join(' '),
+      className: [node.props.className, "g-kleros_footer__anchor"]
+        .filter((c) => !!c)
+        .join(" "),
     });
   }
 
